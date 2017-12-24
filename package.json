@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "update": "bash ./scripts/update.sh"
+    "update": "bash ./scripts/update.sh",
+    "generate-ng": "bash ./scripts/generate-ng.sh"
   },
   "repository": {
     "type": "git",
