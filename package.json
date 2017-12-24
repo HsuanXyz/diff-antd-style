@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "update": "bash ./scripts/update.sh",
-    "generate-ng": "bash ./scripts/generate-ng.sh"
+    "generate-ng": "bash ./scripts/generate-ng.sh",
+    "generate-react": "bash ./scripts/generate-react.sh"
   },
   "repository": {
     "type": "git",
