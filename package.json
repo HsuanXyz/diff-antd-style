@@ -8,6 +8,7 @@
     "update": "bash ./scripts/update.sh",
     "generate-ng": "bash ./scripts/generate-ng.sh",
     "generate-react": "bash ./scripts/generate-react.sh"
+    "diff": "diff -ruNa ant-design-master/components ng-zorro-antd-master/components >> diff.diff"
   },
   "repository": {
     "type": "git",
