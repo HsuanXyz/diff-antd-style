@@ -1,22 +1,30 @@
 diff -ruNa ant-design-master/components/affix/style/index.less ng-zorro-antd-master/components/affix/style/index.less
---- ant-design-master/components/affix/style/index.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/affix/style/index.less	2017-12-24 22:37:17.000000000 +0800
-@@ -3,5 +3,4 @@
- .@{ant-prefix}-affix {
-   position: fixed;
-   z-index: @zindex-affix;
+--- ant-design-master/components/affix/style/index.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/affix/style/index.less	2017-12-21 14:44:18.000000000 +0800
+@@ -1,7 +1,6 @@
+-@import "../../style/themes/default";
+-
+-.@{ant-prefix}-affix {
+-  position: fixed;
+-  z-index: @zindex-affix;
 -  overflow: auto;
- }
+-}
++@import "../../style/themes/default";
++
++.@{ant-prefix}-affix {
++  position: fixed;
++  z-index: @zindex-affix;
++}
 diff -ruNa ant-design-master/components/affix/style/patch.less ng-zorro-antd-master/components/affix/style/patch.less
 --- ant-design-master/components/affix/style/patch.less	1970-01-01 08:00:00.000000000 +0800
-+++ ng-zorro-antd-master/components/affix/style/patch.less	2017-12-24 22:37:17.000000000 +0800
++++ ng-zorro-antd-master/components/affix/style/patch.less	2017-12-21 14:44:18.000000000 +0800
 @@ -0,0 +1,3 @@
 +nz-affix {
 +  display: block;
 +}
 diff -ruNa ant-design-master/components/alert/style/index.less ng-zorro-antd-master/components/alert/style/index.less
---- ant-design-master/components/alert/style/index.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/alert/style/index.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/alert/style/index.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/alert/style/index.less	2017-12-21 14:44:18.000000000 +0800
 @@ -1,5 +1,4 @@
  @import "../../style/themes/default";
 -@import "../../style/mixins/index";
@@ -144,69 +152,173 @@ diff -ruNa ant-design-master/components/alert/style/index.less ng-zorro-antd-mas
  
 diff -ruNa ant-design-master/components/alert/style/patch.less ng-zorro-antd-master/components/alert/style/patch.less
 --- ant-design-master/components/alert/style/patch.less	1970-01-01 08:00:00.000000000 +0800
-+++ ng-zorro-antd-master/components/alert/style/patch.less	2017-12-24 22:37:17.000000000 +0800
++++ ng-zorro-antd-master/components/alert/style/patch.less	2017-12-21 14:44:18.000000000 +0800
 @@ -0,0 +1,3 @@
 +nz-alert {
 +  display: block;
 +}
 diff -ruNa ant-design-master/components/anchor/style/index.less ng-zorro-antd-master/components/anchor/style/index.less
---- ant-design-master/components/anchor/style/index.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/anchor/style/index.less	2017-12-24 22:37:17.000000000 +0800
-@@ -1,12 +1,7 @@
- @import "../../style/themes/default";
+--- ant-design-master/components/anchor/style/index.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/anchor/style/index.less	2017-12-21 14:44:18.000000000 +0800
+@@ -1,77 +1,72 @@
+-@import "../../style/themes/default";
 -@import "../../style/mixins/index";
 -
 -@anchor-border-width: 2px;
- 
- .@{ant-prefix}-anchor {
+-
+-.@{ant-prefix}-anchor {
 -  .reset-component;
-   position: relative;
+-  position: relative;
 -  padding-left: @anchor-border-width;
-   &-wrapper {
-     background-color: @component-background;
-   }
-@@ -19,7 +14,7 @@
-     &:before {
-       content: ' ';
-       position: relative;
+-  &-wrapper {
+-    background-color: @component-background;
+-  }
+-
+-  &-ink {
+-    position: absolute;
+-    height: 100%;
+-    left: 0;
+-    top: 0;
+-    &:before {
+-      content: ' ';
+-      position: relative;
 -      width: @anchor-border-width;
-+      width: 2px;
-       height: 100%;
-       display: block;
-       background-color: @border-color-split;
-@@ -28,10 +23,10 @@
-     &-ball {
-       display: none;
-       position: absolute;
+-      height: 100%;
+-      display: block;
+-      background-color: @border-color-split;
+-      margin: 0 auto;
+-    }
+-    &-ball {
+-      display: none;
+-      position: absolute;
 -      width: 8px;
 -      height: 8px;
 -      border-radius: 8px;
 -      border: 2px solid @primary-color;
+-      background-color: @component-background;
+-      left: 50%;
+-      transition: top .3s ease-in-out;
+-      transform: translateX(-50%);
+-      &.visible {
+-        display: inline-block;
+-      }
+-    }
+-  }
+-
+-  &.fixed &-ink &-ink-ball {
+-    display: none;
+-  }
+-
+-  &-link {
+-    padding: 8px 0 8px 16px;
+-    line-height: 1;
+-
+-    &-title {
+-      display: block;
+-      position: relative;
+-      transition: all .3s;
+-      color: @text-color;
+-      white-space: nowrap;
+-      overflow: hidden;
+-      text-overflow: ellipsis;
+-      margin-bottom: 8px;
+-
+-      &:only-child {
+-        margin-bottom: 0;
+-      }
+-    }
+-
+-    &-active > &-title {
+-      color: @primary-color;
+-    }
+-  }
+-
+-  &-link &-link {
+-    padding-top: 6px;
+-    padding-bottom: 6px;
+-  }
+-}
++@import "../../style/themes/default";
++
++.@{ant-prefix}-anchor {
++  position: relative;
++  &-wrapper {
++    background-color: @component-background;
++  }
++
++  &-ink {
++    position: absolute;
++    height: 100%;
++    left: 0;
++    top: 0;
++    &:before {
++      content: ' ';
++      position: relative;
++      width: 2px;
++      height: 100%;
++      display: block;
++      background-color: @border-color-split;
++      margin: 0 auto;
++    }
++    &-ball {
++      display: none;
++      position: absolute;
 +      width: 9px;
 +      height: 9px;
 +      border-radius: 9px;
 +      border: 3px solid @primary-color;
-       background-color: @component-background;
-       left: 50%;
-       transition: top .3s ease-in-out;
-@@ -47,7 +42,7 @@
-   }
- 
-   &-link {
--    padding: 8px 0 8px 16px;
++      background-color: @component-background;
++      left: 50%;
++      transition: top .3s ease-in-out;
++      transform: translateX(-50%);
++      &.visible {
++        display: inline-block;
++      }
++    }
++  }
++
++  &.fixed &-ink &-ink-ball {
++    display: none;
++  }
++
++  &-link {
 +    padding: 8px 0 8px 18px;
-     line-height: 1;
- 
-     &-title {
++    line-height: 1;
++
++    &-title {
++      display: block;
++      position: relative;
++      transition: all .3s;
++      color: @text-color;
++      white-space: nowrap;
++      overflow: hidden;
++      text-overflow: ellipsis;
++      margin-bottom: 8px;
++
++      &:only-child {
++        margin-bottom: 0;
++      }
++    }
++
++    &-active > &-title {
++      color: @primary-color;
++    }
++  }
++
++  &-link &-link {
++    padding-top: 6px;
++    padding-bottom: 6px;
++  }
++}
 diff -ruNa ant-design-master/components/anchor/style/patch.less ng-zorro-antd-master/components/anchor/style/patch.less
 --- ant-design-master/components/anchor/style/patch.less	1970-01-01 08:00:00.000000000 +0800
-+++ ng-zorro-antd-master/components/anchor/style/patch.less	2017-12-24 22:37:17.000000000 +0800
++++ ng-zorro-antd-master/components/anchor/style/patch.less	2017-12-21 14:44:18.000000000 +0800
 @@ -0,0 +1,3 @@
 +nz-link {
 +  display: block;
 +}
 diff -ruNa ant-design-master/components/auto-complete/style/index.less ng-zorro-antd-master/components/auto-complete/style/index.less
---- ant-design-master/components/auto-complete/style/index.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/auto-complete/style/index.less	2017-12-28 10:51:12.000000000 +0800
 +++ ng-zorro-antd-master/components/auto-complete/style/index.less	1970-01-01 08:00:00.000000000 +0800
 @@ -1,79 +0,0 @@
 -@import "../../style/themes/default";
@@ -289,56 +401,185 @@ diff -ruNa ant-design-master/components/auto-complete/style/index.less ng-zorro-
 -  }
 -}
 diff -ruNa ant-design-master/components/avatar/style/index.less ng-zorro-antd-master/components/avatar/style/index.less
---- ant-design-master/components/avatar/style/index.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/avatar/style/index.less	2017-12-24 22:37:17.000000000 +0800
-@@ -1,10 +1,8 @@
- @import "../../style/themes/default";
+--- ant-design-master/components/avatar/style/index.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/avatar/style/index.less	2017-12-21 14:44:18.000000000 +0800
+@@ -1,50 +1,48 @@
+-@import "../../style/themes/default";
 -@import "../../style/mixins/index";
- 
- @avatar-prefix-cls: ~"@{ant-prefix}-avatar";
- 
- .@{avatar-prefix-cls} {
+-
+-@avatar-prefix-cls: ~"@{ant-prefix}-avatar";
+-
+-.@{avatar-prefix-cls} {
 -  .reset-component;
-   display: inline-block;
-   text-align: center;
-   background: @avatar-bg;
+-  display: inline-block;
+-  text-align: center;
+-  background: @avatar-bg;
+-  color: @avatar-color;
+-  white-space: nowrap;
+-  position: relative;
+-  overflow: hidden;
+-
+-  .avatar-size(@avatar-size-base, @avatar-font-size-base);
+-
+-  &-lg {
+-    .avatar-size(@avatar-size-lg, @avatar-font-size-lg);
+-  }
+-
+-  &-sm {
+-    .avatar-size(@avatar-size-sm, @avatar-font-size-sm);
+-  }
+-
+-  &-square {
+-    border-radius: @avatar-border-radius;
+-  }
+-
+-  & > img {
+-    width: 100%;
+-    height: 100%;
+-    display: block;
+-  }
+-}
+-
+-.avatar-size(@size, @font-size) {
+-  width: @size;
+-  height: @size;
+-  line-height: @size;
+-  border-radius: @size / 2;
+-
+-  & > * {
+-    line-height: @size;
+-  }
+-
+-  &.@{avatar-prefix-cls}-icon {
+-    font-size: @font-size;
+-  }
+-}
++@import "../../style/themes/default";
++
++@avatar-prefix-cls: ~"@{ant-prefix}-avatar";
++
++.@{avatar-prefix-cls} {
++  display: inline-block;
++  text-align: center;
++  background: @avatar-bg;
++  color: @avatar-color;
++  white-space: nowrap;
++  position: relative;
++  overflow: hidden;
++
++  .avatar-size(@avatar-size-base, @avatar-font-size-base);
++
++  &-lg {
++    .avatar-size(@avatar-size-lg, @avatar-font-size-lg);
++  }
++
++  &-sm {
++    .avatar-size(@avatar-size-sm, @avatar-font-size-sm);
++  }
++
++  &-square {
++    border-radius: @avatar-border-radius;
++  }
++
++  & > img {
++    width: 100%;
++    height: 100%;
++    display: block;
++  }
++}
++
++.avatar-size(@size, @font-size) {
++  width: @size;
++  height: @size;
++  line-height: @size;
++  border-radius: @size / 2;
++
++  & > * {
++    line-height: @size;
++  }
++
++  &.@{avatar-prefix-cls}-icon {
++    font-size: @font-size;
++  }
++}
 diff -ruNa ant-design-master/components/back-top/style/index.less ng-zorro-antd-master/components/back-top/style/index.less
---- ant-design-master/components/back-top/style/index.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/back-top/style/index.less	2017-12-24 22:37:17.000000000 +0800
-@@ -1,10 +1,8 @@
- @import "../../style/themes/default";
+--- ant-design-master/components/back-top/style/index.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/back-top/style/index.less	2017-12-21 14:44:18.000000000 +0800
+@@ -1,38 +1,33 @@
+-@import "../../style/themes/default";
 -@import "../../style/mixins/index";
- 
- @backtop-prefix-cls: ~"@{ant-prefix}-back-top";
- 
- .@{backtop-prefix-cls} {
+-
+-@backtop-prefix-cls: ~"@{ant-prefix}-back-top";
+-
+-.@{backtop-prefix-cls} {
 -  .reset-component;
-   z-index: @zindex-back-top;
-   position: fixed;
-   right: 100px;
-@@ -21,7 +19,6 @@
-     color: @back-top-color;
-     text-align: center;
-     transition: all .3s @ease-in-out;
+-  z-index: @zindex-back-top;
+-  position: fixed;
+-  right: 100px;
+-  bottom: 50px;
+-  height: 40px;
+-  width: 40px;
+-  cursor: pointer;
+-
+-  &-content {
+-    height: 40px;
+-    width: 40px;
+-    border-radius: 20px;
+-    background-color: @back-top-bg;
+-    color: @back-top-color;
+-    text-align: center;
+-    transition: all .3s @ease-in-out;
 -    overflow: hidden;
- 
-     &:hover {
-       background-color: @back-top-hover-bg;
-@@ -30,9 +27,7 @@
-   }
- 
-   &-icon {
+-
+-    &:hover {
+-      background-color: @back-top-hover-bg;
+-      transition: all .3s @ease-in-out;
+-    }
+-  }
+-
+-  &-icon {
 -    margin: 12px auto;
 -    width: 14px;
 -    height: 16px;
 -    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAoCAYAAACWwljjAAAABGdBTUEAALGPC/xhBQAAAbtJREFUWAntmMtKw0AUhhMvS5cuxILgQlRUpIggIoKIIoigG1eC+AA+jo+i6FIXBfeuXIgoeKVeitVWJX5HWhhDksnUpp3FDPyZk3Nm5nycmZKkXhAEOXSA3lG7muTeRzmfy6HneUvIhnYkQK+Q9NhAA0Opg0vBEhjBKHiyb8iGMyQMOYuK41BcBSypAL+MYXSKjtFAW7EAGEO3qN4uMQbbAkXiSfRQJ1H6a+yhlkKRcAoVFYiweYNjtCVQJJpBz2GCiPt7fBOZQpFgDpUikse5HgnkM4Fi4QX0Fpc5wf9EbLqpUCy4jMoJSXWhFwbMNgWKhVbRhy5jirhs9fy/oFhgHVVTJEs7RLZ8sSEoJm6iz7SZDMbJ+/OKERQTttCXQRLToRUmrKWCYuA2+jbN0MB4OQobYShfdTCgn/sL1K36M7TLrN3n+758aPy2rrpR6+/od5E8tf/A1uLS9aId5T7J3CNYihkQ4D9PiMdMC7mp4rjB9kjFjZp8BlnVHJBuO1yFXIV0FdDF3RlyFdJVQBdv5AxVdIsq8apiZ2PyYO1EVykesGfZEESsCkweyR8MUW+V8uJ1gkYipmpdP1pm2aJVPEGzAAAAAElFTkSuQmCC) ~"100%/100%" no-repeat;
+-  }
+-}
++@import "../../style/themes/default";
++
++@backtop-prefix-cls: ~"@{ant-prefix}-back-top";
++
++.@{backtop-prefix-cls} {
++  z-index: @zindex-back-top;
++  position: fixed;
++  right: 100px;
++  bottom: 50px;
++  height: 40px;
++  width: 40px;
++  cursor: pointer;
++
++  &-content {
++    height: 40px;
++    width: 40px;
++    border-radius: 20px;
++    background-color: @back-top-bg;
++    color: @back-top-color;
++    text-align: center;
++    transition: all .3s @ease-in-out;
++
++    &:hover {
++      background-color: @back-top-hover-bg;
++      transition: all .3s @ease-in-out;
++    }
++  }
++
++  &-icon {
 +    font-size: 20px;
 +    margin-top: 10px;
-   }
- }
++  }
++}
 diff -ruNa ant-design-master/components/badge/style/index.less ng-zorro-antd-master/components/badge/style/index.less
---- ant-design-master/components/badge/style/index.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/badge/style/index.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/badge/style/index.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/badge/style/index.less	2017-12-21 14:44:18.000000000 +0800
 @@ -1,11 +1,9 @@
  @import "../../style/themes/default";
 -@import "../../style/mixins/index";
@@ -421,7 +662,7 @@ diff -ruNa ant-design-master/components/badge/style/index.less ng-zorro-antd-mas
  }
 diff -ruNa ant-design-master/components/badge/style/patch.less ng-zorro-antd-master/components/badge/style/patch.less
 --- ant-design-master/components/badge/style/patch.less	1970-01-01 08:00:00.000000000 +0800
-+++ ng-zorro-antd-master/components/badge/style/patch.less	2017-12-24 22:37:17.000000000 +0800
++++ ng-zorro-antd-master/components/badge/style/patch.less	2017-12-21 14:44:18.000000000 +0800
 @@ -0,0 +1,16 @@
 +@import "./index";
 +
@@ -440,8 +681,8 @@ diff -ruNa ant-design-master/components/badge/style/patch.less ng-zorro-antd-mas
 +  }
 +}
 diff -ruNa ant-design-master/components/breadcrumb/style/index.less ng-zorro-antd-master/components/breadcrumb/style/index.less
---- ant-design-master/components/breadcrumb/style/index.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/breadcrumb/style/index.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/breadcrumb/style/index.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/breadcrumb/style/index.less	2017-12-21 14:44:18.000000000 +0800
 @@ -1,18 +1,13 @@
  @import "../../style/themes/default";
 -@import "../../style/mixins/index";
@@ -485,7 +726,7 @@ diff -ruNa ant-design-master/components/breadcrumb/style/index.less ng-zorro-ant
    &-link {
 diff -ruNa ant-design-master/components/breadcrumb/style/patch.less ng-zorro-antd-master/components/breadcrumb/style/patch.less
 --- ant-design-master/components/breadcrumb/style/patch.less	1970-01-01 08:00:00.000000000 +0800
-+++ ng-zorro-antd-master/components/breadcrumb/style/patch.less	2017-12-24 22:37:17.000000000 +0800
++++ ng-zorro-antd-master/components/breadcrumb/style/patch.less	2017-12-21 14:44:18.000000000 +0800
 @@ -0,0 +1,12 @@
 +@import "./index";
 +.@{breadcrumb-prefix-cls} {
@@ -500,8 +741,8 @@ diff -ruNa ant-design-master/components/breadcrumb/style/patch.less ng-zorro-ant
 +  }
 +}
 diff -ruNa ant-design-master/components/button/style/index.less ng-zorro-antd-master/components/button/style/index.less
---- ant-design-master/components/button/style/index.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/button/style/index.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/button/style/index.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/button/style/index.less	2017-12-21 14:44:18.000000000 +0800
 @@ -12,7 +12,6 @@
  // Button styles
  // -----------------------------
@@ -534,8 +775,8 @@ diff -ruNa ant-design-master/components/button/style/index.less ng-zorro-antd-ma
 -  }
 -}
 diff -ruNa ant-design-master/components/button/style/mixin.less ng-zorro-antd-master/components/button/style/mixin.less
---- ant-design-master/components/button/style/mixin.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/button/style/mixin.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/button/style/mixin.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/button/style/mixin.less	2017-12-21 14:44:18.000000000 +0800
 @@ -40,7 +40,7 @@
  
    &:hover,
@@ -602,8 +843,8 @@ diff -ruNa ant-design-master/components/button/style/mixin.less ng-zorro-antd-ma
  
    & > & {
 diff -ruNa ant-design-master/components/calendar/style/index.less ng-zorro-antd-master/components/calendar/style/index.less
---- ant-design-master/components/calendar/style/index.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/calendar/style/index.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/calendar/style/index.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/calendar/style/index.less	2017-12-21 14:44:18.000000000 +0800
 @@ -1,10 +1,10 @@
  @import "../../style/themes/default";
 -@import "../../style/mixins/index";
@@ -663,7 +904,7 @@ diff -ruNa ant-design-master/components/calendar/style/index.less ng-zorro-antd-
    &-selected-day &-value,
 diff -ruNa ant-design-master/components/calendar/style/patch.less ng-zorro-antd-master/components/calendar/style/patch.less
 --- ant-design-master/components/calendar/style/patch.less	1970-01-01 08:00:00.000000000 +0800
-+++ ng-zorro-antd-master/components/calendar/style/patch.less	2017-12-24 22:37:17.000000000 +0800
++++ ng-zorro-antd-master/components/calendar/style/patch.less	2017-12-21 14:44:18.000000000 +0800
 @@ -0,0 +1,8 @@
 +nz-calendar {
 +  display: block;
@@ -674,8 +915,8 @@ diff -ruNa ant-design-master/components/calendar/style/patch.less ng-zorro-antd-
 +  height: 100%;
 +}
 diff -ruNa ant-design-master/components/card/style/index.less ng-zorro-antd-master/components/card/style/index.less
---- ant-design-master/components/card/style/index.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/card/style/index.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/card/style/index.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/card/style/index.less	2017-12-21 14:44:18.000000000 +0800
 @@ -2,21 +2,19 @@
  @import "../../style/mixins/index";
  
@@ -918,15 +1159,15 @@ diff -ruNa ant-design-master/components/card/style/index.less ng-zorro-antd-mast
  }
 diff -ruNa ant-design-master/components/card/style/patch.less ng-zorro-antd-master/components/card/style/patch.less
 --- ant-design-master/components/card/style/patch.less	1970-01-01 08:00:00.000000000 +0800
-+++ ng-zorro-antd-master/components/card/style/patch.less	2017-12-24 22:37:17.000000000 +0800
++++ ng-zorro-antd-master/components/card/style/patch.less	2017-12-21 14:44:18.000000000 +0800
 @@ -0,0 +1,4 @@
 +nz-card {
 +  display: block;
 +  position: relative;
 +}
 diff -ruNa ant-design-master/components/carousel/style/index.less ng-zorro-antd-master/components/carousel/style/index.less
---- ant-design-master/components/carousel/style/index.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/carousel/style/index.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/carousel/style/index.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/carousel/style/index.less	2017-12-21 14:44:18.000000000 +0800
 @@ -2,8 +2,6 @@
  @import "../../style/mixins/index";
  
@@ -954,7 +1195,7 @@ diff -ruNa ant-design-master/components/carousel/style/index.less ng-zorro-antd-
            opacity: 0.75;
 diff -ruNa ant-design-master/components/carousel/style/patch.less ng-zorro-antd-master/components/carousel/style/patch.less
 --- ant-design-master/components/carousel/style/patch.less	1970-01-01 08:00:00.000000000 +0800
-+++ ng-zorro-antd-master/components/carousel/style/patch.less	2017-12-24 22:37:17.000000000 +0800
++++ ng-zorro-antd-master/components/carousel/style/patch.less	2017-12-21 14:44:18.000000000 +0800
 @@ -0,0 +1,12 @@
 +nz-carousel {
 +  display: block;
@@ -969,8 +1210,8 @@ diff -ruNa ant-design-master/components/carousel/style/patch.less ng-zorro-antd-
 +  }
 +}
 diff -ruNa ant-design-master/components/cascader/style/index.less ng-zorro-antd-master/components/cascader/style/index.less
---- ant-design-master/components/cascader/style/index.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/cascader/style/index.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/cascader/style/index.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/cascader/style/index.less	2017-12-21 14:44:18.000000000 +0800
 @@ -5,7 +5,7 @@
  @cascader-prefix-cls: ~"@{ant-prefix}-cascader";
  
@@ -1084,7 +1325,7 @@ diff -ruNa ant-design-master/components/cascader/style/index.less ng-zorro-antd-
      &-loading:after {
 diff -ruNa ant-design-master/components/cascader/style/patch.less ng-zorro-antd-master/components/cascader/style/patch.less
 --- ant-design-master/components/cascader/style/patch.less	1970-01-01 08:00:00.000000000 +0800
-+++ ng-zorro-antd-master/components/cascader/style/patch.less	2017-12-24 22:37:17.000000000 +0800
++++ ng-zorro-antd-master/components/cascader/style/patch.less	2017-12-21 14:44:18.000000000 +0800
 @@ -0,0 +1,15 @@
 +@import "../../style/themes/default";
 +
@@ -1102,8 +1343,8 @@ diff -ruNa ant-design-master/components/cascader/style/patch.less ng-zorro-antd-
 +  margin-bottom: 4px;
 +}
 diff -ruNa ant-design-master/components/checkbox/style/mixin.less ng-zorro-antd-master/components/checkbox/style/mixin.less
---- ant-design-master/components/checkbox/style/mixin.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/checkbox/style/mixin.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/checkbox/style/mixin.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/checkbox/style/mixin.less	2017-12-21 14:44:18.000000000 +0800
 @@ -4,15 +4,13 @@
    @checkbox-inner-prefix-cls: ~"@{checkbox-prefix-cls}-inner";
    // 一般状态
@@ -1141,16 +1382,17 @@ diff -ruNa ant-design-master/components/checkbox/style/mixin.less ng-zorro-antd-
      display: inline-block;
      & + & {
        margin-left: 8px;
-@@ -166,7 +163,7 @@
+@@ -166,8 +163,7 @@
    }
  
    .@{checkbox-prefix-cls}-group {
 -    .reset-component;
+-    display: inline-block;
 +    font-size: @font-size-base;
      &-item {
        display: inline-block;
        margin-right: 8px;
-@@ -178,6 +175,23 @@
+@@ -179,6 +175,23 @@
        margin-left: 0;
      }
    }
@@ -1175,8 +1417,8 @@ diff -ruNa ant-design-master/components/checkbox/style/mixin.less ng-zorro-antd-
  
  @keyframes antCheckboxEffect {
 diff -ruNa ant-design-master/components/collapse/style/index.less ng-zorro-antd-master/components/collapse/style/index.less
---- ant-design-master/components/collapse/style/index.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/collapse/style/index.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/collapse/style/index.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/collapse/style/index.less	2017-12-21 14:44:18.000000000 +0800
 @@ -3,18 +3,17 @@
  
  @collapse-prefix-cls: ~"@{ant-prefix}-collapse";
@@ -1294,1005 +1536,374 @@ diff -ruNa ant-design-master/components/collapse/style/index.less ng-zorro-antd-
  }
 diff -ruNa ant-design-master/components/collapse/style/patch.less ng-zorro-antd-master/components/collapse/style/patch.less
 --- ant-design-master/components/collapse/style/patch.less	1970-01-01 08:00:00.000000000 +0800
-+++ ng-zorro-antd-master/components/collapse/style/patch.less	2017-12-24 22:37:17.000000000 +0800
++++ ng-zorro-antd-master/components/collapse/style/patch.less	2017-12-21 14:44:18.000000000 +0800
 @@ -0,0 +1,3 @@
 +nz-collapse{
 +  display: block;
 +}
 diff -ruNa ant-design-master/components/date-picker/style/Calendar.less ng-zorro-antd-master/components/date-picker/style/Calendar.less
---- ant-design-master/components/date-picker/style/Calendar.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/date-picker/style/Calendar.less	1970-01-01 08:00:00.000000000 +0800
-@@ -1,336 +0,0 @@
--.calendarPanelHeader(@calendar-prefix-cls) {
+--- ant-design-master/components/date-picker/style/Calendar.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/date-picker/style/Calendar.less	2017-12-21 14:44:18.000000000 +0800
+@@ -1,6 +1,6 @@
+ .calendarPanelHeader(@calendar-prefix-cls) {
 -  height: 40px;
 -  line-height: 40px;
--  text-align: center;
--  user-select: none;
--  border-bottom: @border-width-base @border-style-base @border-color-split;
--
--  a:hover {
--    color: @link-hover-color;
--  }
--
--  .@{calendar-prefix-cls}-century-select,
--  .@{calendar-prefix-cls}-decade-select,
--  .@{calendar-prefix-cls}-year-select,
--  .@{calendar-prefix-cls}-month-select {
--    padding: 0 2px;
++  height: 34px;
++  line-height: 34px;
+   text-align: center;
+   user-select: none;
+   border-bottom: @border-width-base @border-style-base @border-color-split;
+@@ -14,10 +14,10 @@
+   .@{calendar-prefix-cls}-year-select,
+   .@{calendar-prefix-cls}-month-select {
+     padding: 0 2px;
 -    font-weight: 500;
--    display: inline-block;
++    font-weight: bold;
+     display: inline-block;
 -    color: @heading-color;
 -    line-height: 40px;
--  }
--
--  .@{calendar-prefix-cls}-century-select-arrow,
--  .@{calendar-prefix-cls}-decade-select-arrow,
--  .@{calendar-prefix-cls}-year-select-arrow,
--  .@{calendar-prefix-cls}-month-select-arrow {
--    display: none;
--  }
--
--  .@{calendar-prefix-cls}-prev-century-btn,
--  .@{calendar-prefix-cls}-next-century-btn,
--  .@{calendar-prefix-cls}-prev-decade-btn,
--  .@{calendar-prefix-cls}-next-decade-btn,
--  .@{calendar-prefix-cls}-prev-month-btn,
--  .@{calendar-prefix-cls}-next-month-btn,
--  .@{calendar-prefix-cls}-prev-year-btn,
--  .@{calendar-prefix-cls}-next-year-btn {
--    position: absolute;
--    top: 0;
--    color: @text-color-secondary;
--    font-family: Arial, "Hiragino Sans GB", "Microsoft Yahei", "Microsoft Sans Serif", sans-serif;
--    padding: 0 5px;
--    font-size: 16px;
--    display: inline-block;
++    color: @text-color;
++    line-height: 34px;
+   }
+ 
+   .@{calendar-prefix-cls}-century-select-arrow,
+@@ -42,7 +42,7 @@
+     padding: 0 5px;
+     font-size: 16px;
+     display: inline-block;
 -    line-height: 40px;
--  }
--
--  .@{calendar-prefix-cls}-prev-century-btn,
--  .@{calendar-prefix-cls}-prev-decade-btn,
--  .@{calendar-prefix-cls}-prev-year-btn {
--    left: 7px;
--
--    &:after {
--      content: '«';
--    }
--  }
--
--  .@{calendar-prefix-cls}-next-century-btn,
--  .@{calendar-prefix-cls}-next-decade-btn,
--  .@{calendar-prefix-cls}-next-year-btn {
--    right: 7px;
--
--    &:after {
--      content: '»';
--    }
--  }
--
--  .@{calendar-prefix-cls}-prev-month-btn {
--    left: 29px;
--
--    &:after {
--      content: '‹';
--    }
--  }
--
--  .@{calendar-prefix-cls}-next-month-btn {
--    right: 29px;
--
--    &:after {
--      content: '›';
--    }
--  }
--}
--
--.@{calendar-prefix-cls} {
--  position: relative;
--  outline: none;
++    line-height: 34px;
+   }
+ 
+   .@{calendar-prefix-cls}-prev-century-btn,
+@@ -85,7 +85,7 @@
+ .@{calendar-prefix-cls} {
+   position: relative;
+   outline: none;
 -  width: 280px;
--  border: @border-width-base @border-style-base #fff;
--  list-style: none;
--  font-size: @font-size-base;
--  text-align: left;
--  background-color: @component-background;
--  border-radius: @border-radius-base;
--  box-shadow: @box-shadow-base;
--  background-clip: padding-box;
--  line-height: @line-height-base;
--
--  &-input-wrap {
--    height: 34px;
++  width: 231px;
+   border: @border-width-base @border-style-base #fff;
+   list-style: none;
+   font-size: @font-size-base;
+@@ -98,7 +98,7 @@
+ 
+   &-input-wrap {
+     height: 34px;
 -    padding: 6px @control-padding-horizontal - 2px;
--    border-bottom: @border-width-base @border-style-base @border-color-split;
--  }
--
--  &-input {
--    border: 0;
--    width: 100%;
--    cursor: auto;
--    outline: 0;
--    height: 22px;
--    color: @input-color;
--    background: @input-bg;
--    .placeholder;
--  }
--
--  &-week-number {
--    width: 286px;
--
--    &-cell {
--      text-align: center;
--    }
--  }
--
--  &-header {
--    .calendarPanelHeader(@calendar-prefix-cls);
--  }
--
--  &-body {
++    padding: 6px;
+     border-bottom: @border-width-base @border-style-base @border-color-split;
+   }
+ 
+@@ -126,7 +126,7 @@
+   }
+ 
+   &-body {
 -    padding: 8px 12px;
--  }
--
--  table {
--    border-collapse: collapse;
--    max-width: 100%;
--    background-color: transparent;
--    width: 100%;
--  }
--
--  table,
--  th,
--  td {
--    border: 0;
++    padding: 4px 8px;
+   }
+ 
+   table {
+@@ -140,7 +140,6 @@
+   th,
+   td {
+     border: 0;
 -    text-align: center;
--  }
--
--  &-calendar-table {
--    border-spacing: 0;
--    margin-bottom: 0;
--  }
--
--  &-column-header {
--    line-height: 18px;
--    width: 33px;
--    padding: 6px 0;
--    text-align: center;
--    .@{calendar-prefix-cls}-column-header-inner {
--      display: block;
--      font-weight: normal;
--    }
--  }
--
--  &-week-number-header {
--    .@{calendar-prefix-cls}-column-header-inner {
--      display: none;
--    }
--  }
--
--  &-cell {
+   }
+ 
+   &-calendar-table {
+@@ -166,8 +165,7 @@
+   }
+ 
+   &-cell {
 -    padding: 3px 0;
 -    height: 30px;
--  }
--
--  &-date {
--    display: block;
--    margin: 0 auto;
--    color: @text-color;
--    border-radius: @border-radius-sm;
++    padding: 4px 0;
+   }
+ 
+   &-date {
+@@ -175,9 +173,9 @@
+     margin: 0 auto;
+     color: @text-color;
+     border-radius: @border-radius-sm;
 -    width: 24px;
 -    height: 24px;
 -    line-height: 22px;
--    border: @border-width-base @border-style-base transparent;
--    padding: 0;
--    background: transparent;
--    text-align: center;
--    transition: background 0.3s ease;
--
--    &-panel {
--      position: relative;
--    }
--
--    &:hover {
--      background: @item-hover-bg;
--      cursor: pointer;
--    }
--
--    &:active {
--      color: #fff;
--      background: @primary-5;
--    }
--  }
--
--  &-today &-date {
--    border-color: @primary-color;
--    font-weight: bold;
--    color: @primary-color;
--  }
--
--  &-last-month-cell &-date,
--  &-next-month-btn-day &-date {
--    color: @disabled-color;
--  }
--
--  &-selected-day &-date {
--    background: @primary-color;
--    color: #fff;
--    border: @border-width-base @border-style-base transparent;
--
--    &:hover {
--      background: @primary-color;
--    }
--  }
--
--  &-disabled-cell &-date {
--    cursor: not-allowed;
--    color: #bcbcbc;
--    background: @disabled-bg;
--    border-radius: 0;
--    width: auto;
--    border: @border-width-base @border-style-base transparent;
--
--    &:hover {
--      background: @disabled-bg;
--    }
--  }
--  &-disabled-cell&-today &-date {
--    position: relative;
--    margin-right: 5px;
--    padding-left: 5px;
--    &:before {
--      content: " ";
--      position: absolute;
--      top: -1px;
--      left: 5px;
++    width: 20px;
++    height: 20px;
++    line-height: 18px;
+     border: @border-width-base @border-style-base transparent;
+     padding: 0;
+     background: transparent;
+@@ -241,10 +239,10 @@
+       position: absolute;
+       top: -1px;
+       left: 5px;
 -      width: 24px;
 -      height: 24px;
--      border: @border-width-base @border-style-base #bcbcbc;
++      width: 20px;
++      height: 20px;
+       border: @border-width-base @border-style-base #bcbcbc;
 -      border-radius: @border-radius-sm;
--    }
--  }
--
--  &-disabled-cell-first-of-row &-date {
--    border-top-left-radius: 4px;
--    border-bottom-left-radius: 4px;
--  }
--
--  &-disabled-cell-last-of-row &-date {
--    border-top-right-radius: 4px;
--    border-bottom-right-radius: 4px;
--  }
--
--  &-footer {
--    border-top: @border-width-base @border-style-base @border-color-split;
--    line-height: 38px;
--    padding: 0 12px;
--    &:empty {
--      border-top: 0;
--    }
--    &-btn {
--      text-align: center;
--      display: block;
--    }
--    &-extra + &-btn {
--      border-top: @border-width-base @border-style-base @border-color-split;
--      margin: 0 -12px;
--      padding: 0 12px;
--    }
--  }
--
--  .@{calendar-prefix-cls}-today-btn,
--  .@{calendar-prefix-cls}-clear-btn {
--    display: inline-block;
--    text-align: center;
--    margin: 0 0 0 8px;
--    &-disabled {
--      color: @disabled-color;
--      cursor: not-allowed;
--    }
--    &:only-child {
--      margin: 0;
--    }
--  }
--
--  .@{calendar-prefix-cls}-clear-btn {
--    display: none;
--    position: absolute;
--    right: 5px;
--    text-indent: -76px;
--    overflow: hidden;
--    width: 20px;
--    height: 20px;
--    text-align: center;
--    line-height: 20px;
--    top: 7px;
--    margin: 0;
--  }
--
--  .@{calendar-prefix-cls}-clear-btn:after {
--    .iconfont-font("\e62e");
--    font-size: @font-size-base;
--    color: @disabled-color;
--    display: inline-block;
--    line-height: 1;
--    width: 20px;
--    text-indent: 43px;
--    transition: color 0.3s ease;
--  }
--
--  .@{calendar-prefix-cls}-clear-btn:hover:after {
--    color: @text-color-secondary;
--  }
--
--  .@{calendar-prefix-cls}-ok-btn {
--    .btn;
--    .btn-primary;
--    .button-size(@btn-height-sm; @btn-padding-sm; @font-size-base; @border-radius-base);
--    line-height: @btn-height-sm - 2px;
--
--    &-disabled {
--      .button-color(@btn-disable-color; @btn-disable-bg; @btn-disable-border);
--      cursor: not-allowed;
--      &:hover {
--        .button-color(@btn-disable-color; @btn-disable-bg; @btn-disable-border);
--      }
--    }
--  }
--}
++      border-radius: @border-radius-base;
+     }
+   }
+ 
 diff -ruNa ant-design-master/components/date-picker/style/DecadePanel.less ng-zorro-antd-master/components/date-picker/style/DecadePanel.less
---- ant-design-master/components/date-picker/style/DecadePanel.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/date-picker/style/DecadePanel.less	1970-01-01 08:00:00.000000000 +0800
-@@ -1,71 +0,0 @@
--.@{calendar-prefix-cls}-decade-panel {
--  position: absolute;
--  top: 0;
--  right: 0;
--  bottom: 0;
--  left: 0;
--  z-index: 10;
--  background: @component-background;
--  border-radius: @border-radius-base;
--  outline: none;
--}
--
--.@{calendar-prefix-cls}-decade-panel-hidden {
--  display: none;
--}
--
--.@{calendar-prefix-cls}-decade-panel-header {
--  .calendarPanelHeader(~"@{calendar-prefix-cls}-decade-panel");
--}
--
--.@{calendar-prefix-cls}-decade-panel-body {
+--- ant-design-master/components/date-picker/style/DecadePanel.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/date-picker/style/DecadePanel.less	2017-12-21 14:44:18.000000000 +0800
+@@ -19,7 +19,7 @@
+ }
+ 
+ .@{calendar-prefix-cls}-decade-panel-body {
 -  height: ~"calc(100% - 40px)";
--}
--
--.@{calendar-prefix-cls}-decade-panel-table {
--  table-layout: fixed;
--  width: 100%;
--  height: 100%;
--  border-collapse: separate;
--}
--
--.@{calendar-prefix-cls}-decade-panel-cell {
--  text-align: center;
--  white-space: nowrap;
--}
--
--.@{calendar-prefix-cls}-decade-panel-decade {
--  display: inline-block;
--  margin: 0 auto;
--  color: @text-color;
--  background: transparent;
--  text-align: center;
--  height: 24px;
--  line-height: 24px;
--  padding: 0 6px;
++  height: ~"calc(100% - 34px)";
+ }
+ 
+ .@{calendar-prefix-cls}-decade-panel-table {
+@@ -43,7 +43,7 @@
+   height: 24px;
+   line-height: 24px;
+   padding: 0 6px;
 -  border-radius: @border-radius-sm;
--  transition: background 0.3s ease;
--
--  &:hover {
--    background: @item-hover-bg;
--    cursor: pointer;
--  }
--}
--
--.@{calendar-prefix-cls}-decade-panel-selected-cell .@{calendar-prefix-cls}-decade-panel-decade {
--  background: @primary-color;
--  color: #fff;
--
--  &:hover {
--    background: @primary-color;
--    color: #fff;
--  }
--}
--
--.@{calendar-prefix-cls}-decade-panel-last-century-cell,
--.@{calendar-prefix-cls}-decade-panel-next-century-cell {
--  .@{calendar-prefix-cls}-decade-panel-decade {
--    user-select: none;
--    color: @disabled-color;
--  }
--}
++  border-radius: 4px;
+   transition: background 0.3s ease;
+ 
+   &:hover {
 diff -ruNa ant-design-master/components/date-picker/style/MonthPanel.less ng-zorro-antd-master/components/date-picker/style/MonthPanel.less
---- ant-design-master/components/date-picker/style/MonthPanel.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/date-picker/style/MonthPanel.less	1970-01-01 08:00:00.000000000 +0800
-@@ -1,75 +0,0 @@
--.@{calendar-prefix-cls}-month-panel {
--  position: absolute;
--  top: 1px;
--  right: 0;
--  bottom: 0;
--  left: 0;
--  z-index: 10;
--  border-radius: @border-radius-base;
--  background: @component-background;
--  outline: none;
--
--  > div { // TODO: this is a useless wrapper, and we need to remove it in rc-calendar
--    height: 100%;
--  }
--}
--
--.@{calendar-prefix-cls}-month-panel-hidden {
--  display: none;
--}
--
--.@{calendar-prefix-cls}-month-panel-header {
--  .calendarPanelHeader(~"@{calendar-prefix-cls}-month-panel");
--}
--
--.@{calendar-prefix-cls}-month-panel-body {
+--- ant-design-master/components/date-picker/style/MonthPanel.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/date-picker/style/MonthPanel.less	2017-12-21 14:44:18.000000000 +0800
+@@ -23,7 +23,7 @@
+ }
+ 
+ .@{calendar-prefix-cls}-month-panel-body {
 -  height: ~"calc(100% - 40px)";
--}
--
--.@{calendar-prefix-cls}-month-panel-table {
--  table-layout: fixed;
--  width: 100%;
--  height: 100%;
--  border-collapse: separate;
--}
--
--.@{calendar-prefix-cls}-month-panel-selected-cell .@{calendar-prefix-cls}-month-panel-month {
--  background: @primary-color;
--  color: #fff;
--
--  &:hover {
--    background: @primary-color;
--    color: #fff;
--  }
--}
--
--.@{calendar-prefix-cls}-month-panel-cell {
--  text-align: center;
--
--  &-disabled .@{calendar-prefix-cls}-month-panel-month {
--    &,
--    &:hover {
--      cursor: not-allowed;
--      color: #bcbcbc;
--      background: @disabled-bg;
--    }
--  }
--}
--
--.@{calendar-prefix-cls}-month-panel-month {
--  display: inline-block;
--  margin: 0 auto;
--  color: @text-color;
--  background: transparent;
--  text-align: center;
--  height: 24px;
--  line-height: 24px;
++  height: ~"calc(100% - 34px)";
+ }
+ 
+ .@{calendar-prefix-cls}-month-panel-table {
+@@ -64,8 +64,8 @@
+   text-align: center;
+   height: 24px;
+   line-height: 24px;
 -  padding: 0 8px;
 -  border-radius: @border-radius-sm;
--  transition: background 0.3s ease;
--
--  &:hover {
--    background: @item-hover-bg;
--    cursor: pointer;
--  }
--}
++  padding: 0 6px;
++  border-radius: 4px;
+   transition: background 0.3s ease;
+ 
+   &:hover {
 diff -ruNa ant-design-master/components/date-picker/style/MonthPicker.less ng-zorro-antd-master/components/date-picker/style/MonthPicker.less
---- ant-design-master/components/date-picker/style/MonthPicker.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/date-picker/style/MonthPicker.less	1970-01-01 08:00:00.000000000 +0800
-@@ -1,11 +0,0 @@
--.@{calendar-prefix-cls}-month {
+--- ant-design-master/components/date-picker/style/MonthPicker.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/date-picker/style/MonthPicker.less	2017-12-21 14:44:18.000000000 +0800
+@@ -1,11 +1,7 @@
+ .@{calendar-prefix-cls}-month {
 -  .@{calendar-prefix-cls}-month-header-wrap {
 -    position: relative;
 -    height: 288px;
 -  }
--  .@{calendar-prefix-cls}-month-panel,
--  .@{calendar-prefix-cls}-year-panel {
--    top: 0;
+   .@{calendar-prefix-cls}-month-panel,
+   .@{calendar-prefix-cls}-year-panel {
+     top: 0;
 -    height: 100%;
--  }
--}
++    height: 248px;
+   }
+ }
 diff -ruNa ant-design-master/components/date-picker/style/Picker.less ng-zorro-antd-master/components/date-picker/style/Picker.less
---- ant-design-master/components/date-picker/style/Picker.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/date-picker/style/Picker.less	1970-01-01 08:00:00.000000000 +0800
-@@ -1,100 +0,0 @@
+--- ant-design-master/components/date-picker/style/Picker.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/date-picker/style/Picker.less	2017-12-21 14:44:18.000000000 +0800
+@@ -1,7 +1,4 @@
 -@import "../../button/style/mixin";
 -
--.@{calendar-prefix-cls}-picker-container {
+ .@{calendar-prefix-cls}-picker-container {
 -  .reset-component;
--  position: absolute;
--  z-index: @zindex-picker;
--
--  &.slide-up-enter.slide-up-enter-active&-placement-topLeft,
--  &.slide-up-enter.slide-up-enter-active&-placement-topRight,
--  &.slide-up-appear.slide-up-appear-active&-placement-topLeft,
--  &.slide-up-appear.slide-up-appear-active&-placement-topRight {
--    animation-name: antSlideDownIn;
--  }
--
--  &.slide-up-enter.slide-up-enter-active&-placement-bottomLeft,
--  &.slide-up-enter.slide-up-enter-active&-placement-bottomRight,
--  &.slide-up-appear.slide-up-appear-active&-placement-bottomLeft,
--  &.slide-up-appear.slide-up-appear-active&-placement-bottomRight {
--    animation-name: antSlideUpIn;
--  }
--
--  &.slide-up-leave.slide-up-leave-active&-placement-topLeft,
--  &.slide-up-leave.slide-up-leave-active&-placement-topRight {
--    animation-name: antSlideDownOut;
--  }
--
--  &.slide-up-leave.slide-up-leave-active&-placement-bottomLeft,
--  &.slide-up-leave.slide-up-leave-active&-placement-bottomRight {
--    animation-name: antSlideUpOut;
--  }
--}
--
--.@{calendar-prefix-cls}-picker {
+   position: absolute;
+   z-index: @zindex-picker;
+ 
+@@ -31,10 +28,10 @@
+ }
+ 
+ .@{calendar-prefix-cls}-picker {
 -  .reset-component;
--  position: relative;
--  display: inline-block;
--  outline: none;
--  transition: opacity 0.3s;
--
--  &-input {
--    outline: none;
--    display: block;
--  }
--
--  &:hover &-input:not(.@{ant-prefix}-input-disabled) {
--    border-color: @primary-color;
--  }
--
+   position: relative;
+   display: inline-block;
+   outline: none;
++  font-size: @font-size-base;
+   transition: opacity 0.3s;
+ 
+   &-input {
+@@ -46,20 +43,16 @@
+     border-color: @primary-color;
+   }
+ 
 -  &:focus &-input:not(.@{ant-prefix}-input-disabled) {
 -    .active();
 -  }
 -
--  &-clear,
--  &-icon {
--    position: absolute;
--    width: 14px;
--    height: 14px;
+   &-clear,
+   &-icon {
+     position: absolute;
+     width: 14px;
+     height: 14px;
 -    right: @control-padding-horizontal;
--    top: 50%;
--    margin-top: -7px;
--    line-height: 14px;
++    right: 8px;
+     top: 50%;
+     margin-top: -7px;
+     line-height: 14px;
 -    font-size: @font-size-sm;
--    transition: all .3s;
--    user-select: none;
--  }
--
--  &-clear {
--    opacity: 0;
--    z-index: 1;
++    font-size: @font-size-base;
+     transition: all .3s;
+     user-select: none;
+   }
+@@ -82,19 +75,14 @@
+   }
+ 
+   &-icon {
 -    color: @disabled-color;
--    background: @input-bg;
--    pointer-events: none;
--    cursor: pointer;
--    &:hover {
--      color: @text-color-secondary;
--    }
--  }
--
--  &:hover &-clear {
--    opacity: 1;
--    pointer-events: auto;
--  }
--
--  &-icon {
--    color: @disabled-color;
--    &:after {
--      content: "\e6bb";
--      font-family: "anticon";
--      font-size: @font-size-base;
++    color: @text-color-secondary;
+     &:after {
+       content: "\e6bb";
+       font-family: "anticon";
+       font-size: @font-size-base;
 -      color: @disabled-color;
--      display: inline-block;
--      line-height: 1;
--    }
--  }
++      color: @text-color-secondary;
+       display: inline-block;
+       line-height: 1;
+     }
+   }
 -
 -  &-small &-clear,
 -  &-small &-icon {
 -    right: @control-padding-horizontal-sm;
 -  }
--}
+ }
 diff -ruNa ant-design-master/components/date-picker/style/RangePicker.less ng-zorro-antd-master/components/date-picker/style/RangePicker.less
---- ant-design-master/components/date-picker/style/RangePicker.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/date-picker/style/RangePicker.less	1970-01-01 08:00:00.000000000 +0800
-@@ -1,222 +0,0 @@
--@input-box-height: 34px;
--
--.@{calendar-prefix-cls}-range-picker-input {
--  background-color: transparent;
--  border: 0;
--  height: 99%;
--  outline: 0;
+--- ant-design-master/components/date-picker/style/RangePicker.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/date-picker/style/RangePicker.less	2017-12-21 14:44:18.000000000 +0800
+@@ -5,8 +5,9 @@
+   border: 0;
+   height: 99%;
+   outline: 0;
 -  width: 44%;
--  text-align: center;
--  .placeholder();
--
--  &[disabled] {
--    cursor: not-allowed;
--  }
--}
--
--.@{calendar-prefix-cls}-range-picker-separator {
--  color: @text-color-secondary;
++  width: 43%;
+   text-align: center;
++  vertical-align: top;
+   .placeholder();
+ 
+   &[disabled] {
+@@ -16,14 +17,14 @@
+ 
+ .@{calendar-prefix-cls}-range-picker-separator {
+   color: @text-color-secondary;
 -  width: 10px;
--  display: inline-block;
++  width: 8px;
+   display: inline-block;
 -  height: 100%;
--  vertical-align: top;
--}
--
--.@{calendar-prefix-cls}-range {
++  line-height: 18px;
+   vertical-align: top;
+ }
+ 
+ .@{calendar-prefix-cls}-range {
 -  width: 552px;
--  overflow: hidden;
--
--  .@{calendar-prefix-cls}-date-panel {
--    &::after {
--      content: ".";
--      display: block;
--      height: 0;
--      clear: both;
--      visibility: hidden;
--    }
--  }
--  &-part {
--    width: 50%;
--    position: relative;
--  }
--
--  &-left {
--    float: left;
--    .@{calendar-prefix-cls} {
--      &-time-picker-inner {
++  width: 470px;
+   overflow: hidden;
+ 
+   .@{calendar-prefix-cls}-date-panel {
+@@ -44,7 +45,7 @@
+     float: left;
+     .@{calendar-prefix-cls} {
+       &-time-picker-inner {
 -        border-right: 1.5px solid @border-color-split;
--      }
--    }
--  }
--
--  &-right {
--    float: right;
--    .@{calendar-prefix-cls} {
--      &-time-picker-inner {
++        border-right: 2px solid @border-color-split;
+       }
+     }
+   }
+@@ -53,7 +54,7 @@
+     float: right;
+     .@{calendar-prefix-cls} {
+       &-time-picker-inner {
 -        border-left: 1.5px solid @border-color-split;
--      }
--    }
--  }
--
--  &-middle {
--    position: absolute;
--    left: 50%;
--    width: 20px;
--    margin-left: -132px;
--    text-align: center;
--    height: @input-box-height;
--    line-height: @input-box-height;
--    color: @text-color-secondary;
--  }
--
--  &-right .@{calendar-prefix-cls}-date-input-wrap {
--    margin-left: -118px;
--  }
--
--  &.@{calendar-prefix-cls}-time &-middle {
--    margin-left: -12px;
--  }
--
--  &.@{calendar-prefix-cls}-time &-right .@{calendar-prefix-cls}-date-input-wrap {
--    margin-left: 0;
--  }
--
--  .@{calendar-prefix-cls}-input-wrap {
--    position: relative;
--    height: @input-box-height;
--  }
--
--  .@{calendar-prefix-cls}-input,
--  .@{calendar-timepicker-prefix-cls}-input {
--    .input;
--    height: @input-height-sm;
--    border: 0;
--    box-shadow: none;
++        border-left: 2px solid @border-color-split;
+       }
+     }
+   }
+@@ -92,8 +93,6 @@
+     height: @input-height-sm;
+     border: 0;
+     box-shadow: none;
 -    padding-left: 0;
 -    padding-right: 0;
--
--    &:focus {
--      box-shadow: none;
--    }
--  }
--
--  .@{calendar-timepicker-prefix-cls}-icon {
--    display: none;
--  }
--
--  &.@{calendar-prefix-cls}-week-number {
--    width: 574px;
--
--    .@{calendar-prefix-cls}-range-part {
--      width: 286px;
--    }
--  }
--
--  .@{calendar-prefix-cls}-year-panel,
+ 
+     &:focus {
+       box-shadow: none;
+@@ -113,8 +112,7 @@
+   }
+ 
+   .@{calendar-prefix-cls}-year-panel,
 -  .@{calendar-prefix-cls}-month-panel,
 -  .@{calendar-prefix-cls}-decade-panel {
--    top: @input-box-height;
--  }
--  .@{calendar-prefix-cls}-month-panel .@{calendar-prefix-cls}-year-panel {
--    top: 0;
--  }
--  .@{calendar-prefix-cls}-decade-panel-table,
--  .@{calendar-prefix-cls}-year-panel-table,
--  .@{calendar-prefix-cls}-month-panel-table {
--    height: 208px;
--  }
--
--  .@{calendar-prefix-cls}-in-range-cell {
--    border-radius: 0;
--    position: relative;
--    > div {
--      position: relative;
--      z-index: 1;
--    }
--    &:before {
--      content: '';
--      display: block;
--      background: @item-active-bg;
--      border-radius: 0;
--      border: 0;
--      position: absolute;
--      top: 4px;
--      bottom: 4px;
--      left: 0;
--      right: 0;
--    }
--  }
--
--  // `div` for selector specificity
--  div&-quick-selector {
--    text-align: left;
--
--    > a {
--      margin-right: 8px;
--    }
--  }
--
--  .@{calendar-prefix-cls},
--  .@{calendar-prefix-cls}-month-panel,
--  .@{calendar-prefix-cls}-year-panel {
--    &-header {
--      border-bottom: 0;
--    }
--    &-body {
--      border-top: @border-width-base @border-style-base @border-color-split;
--    }
--  }
--
--  &.@{calendar-prefix-cls}-time {
--    .@{calendar-timepicker-prefix-cls} {
--      height: 207px;
--      width: 100%;
--      top: 68px;
--      z-index: 2; // cover .ant-calendar-range .ant-calendar-in-range-cell > div (z-index: 1)
--      &-panel {
++  .@{calendar-prefix-cls}-month-panel {
+     top: @input-box-height;
+   }
+   .@{calendar-prefix-cls}-month-panel .@{calendar-prefix-cls}-year-panel {
+@@ -174,12 +172,12 @@
+       top: 68px;
+       z-index: 2; // cover .ant-calendar-range .ant-calendar-in-range-cell > div (z-index: 1)
+       &-panel {
 -        height: 267px;
--        margin-top: -34px;
--      }
--
--      &-inner {
++        height: 241px;
+         margin-top: -34px;
+       }
+ 
+       &-inner {
 -        padding-top: 40px;
--        height: 100%;
--        background: none;
--      }
--
--      &-combobox {
--        display: inline-block;
--        height: 100%;
--        background-color: @component-background;
--        border-top: @border-width-base @border-style-base @border-color-split;
--      }
--      &-select {
--        height: 100%;
--        ul {
--          max-height: 100%;
--        }
--      }
--    }
--    .@{calendar-prefix-cls}-footer .@{calendar-prefix-cls}-time-picker-btn {
--      margin-right: 8px;
--    }
--    .@{calendar-prefix-cls}-today-btn {
--      margin: 8px 12px;
--      height: 22px;
--      line-height: 22px;
--    }
--  }
--
--  &-with-ranges.@{calendar-prefix-cls}-time .@{calendar-timepicker-prefix-cls} {
--    height: 247px;
--    &-panel {
--      height: 281px;
--    }
--  }
--}
--
--.@{calendar-prefix-cls}-range.@{calendar-prefix-cls}-show-time-picker {
--  .@{calendar-prefix-cls}-body {
--    border-top-color: transparent;
--  }
--}
++        padding-top: 34px;
+         height: 100%;
+         background: none;
+       }
 diff -ruNa ant-design-master/components/date-picker/style/TimePicker.less ng-zorro-antd-master/components/date-picker/style/TimePicker.less
---- ant-design-master/components/date-picker/style/TimePicker.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/date-picker/style/TimePicker.less	1970-01-01 08:00:00.000000000 +0800
-@@ -1,149 +0,0 @@
--.@{calendar-timepicker-prefix-cls} {
--  position: absolute;
--  width: 100%;
+--- ant-design-master/components/date-picker/style/TimePicker.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/date-picker/style/TimePicker.less	2017-12-21 14:44:18.000000000 +0800
+@@ -1,7 +1,7 @@
+ .@{calendar-timepicker-prefix-cls} {
+   position: absolute;
+   width: 100%;
 -  top: 40px;
--  background-color: @component-background;
--
--  &-panel {
--    z-index: @zindex-picker;
--    position: absolute;
--    width: 100%;
--  }
--
--  &-inner {
--    display: inline-block;
--    position: relative;
--    outline: none;
--    list-style: none;
--    font-size: @font-size-base;
--    text-align: left;
--    background-color: @component-background;
--    background-clip: padding-box;
--    line-height: 1.5;
--    overflow: hidden;
--    width: 100%;
--  }
--  &-combobox {
--    width: 100%;
--  }
--
--  &-column-1,
--  &-column-1 &-select {
--    width: 100%;
--  }
--  &-column-2 &-select {
--    width: 50%;
--  }
--  &-column-3 &-select {
--    width: 33.33%;
--  }
--  &-column-4 &-select {
--    width: 25%;
--  }
--
--  &-input-wrap {
--    display: none;
--  }
--
--  &-select {
--    float: left;
--    font-size: @font-size-base;
--    border-right: @border-width-base @border-style-base @border-color-split;
--    box-sizing: border-box;
--    overflow: hidden;
--    position: relative; // Fix chrome weird render bug
++  top: 34px;
+   background-color: @component-background;
+ 
+   &-panel {
+@@ -52,7 +52,7 @@
+     box-sizing: border-box;
+     overflow: hidden;
+     position: relative; // Fix chrome weird render bug
 -    height: 226px;
--
--    &:hover {
--      overflow-y: auto;
--    }
--
--    &:first-child {
--      border-left: 0;
--      margin-left: 0;
--    }
--
--    &:last-child {
--      border-right: 0;
--    }
--
--    ul {
--      list-style: none;
--      box-sizing: border-box;
--      margin: 0;
--      padding: 0;
--      width: 100%;
--      max-height: 206px;
--    }
--
--    li {
--      text-align: center;
--      list-style: none;
--      box-sizing: content-box;
--      margin: 0;
--      width: 100%;
--      height: 24px;
--      line-height: 24px;
--      cursor: pointer;
--      user-select: none;
--      transition: background 0.3s ease;
--    }
--
--    li:last-child:after {
--      content: '';
++    height: 206px;
+ 
+     &:hover {
+       overflow-y: auto;
+@@ -91,7 +91,7 @@
+ 
+     li:last-child:after {
+       content: '';
 -      height: 202px;
--      display: block;
--    }
--
--    li:hover {
--      background: @item-hover-bg;
--    }
--
--    li&-option-selected {
--      background: @time-picker-selected-bg;
--      font-weight: bold;
--    }
--
--    li&-option-disabled {
--      color: @btn-disable-color;
--      &:hover {
--        background: transparent;
--        cursor: not-allowed;
--      }
--    }
--  }
--}
--
--.@{calendar-prefix-cls}-time {
--  .@{calendar-prefix-cls}-day-select {
--    padding: 0 2px;
++      height: 182px;
+       display: block;
+     }
+ 
+@@ -117,9 +117,9 @@
+ .@{calendar-prefix-cls}-time {
+   .@{calendar-prefix-cls}-day-select {
+     padding: 0 2px;
 -    font-weight: 500;
--    display: inline-block;
++    font-weight: bold;
+     display: inline-block;
 -    color: @heading-color;
--    line-height: 34px;
--  }
--
--  .@{calendar-prefix-cls}-footer {
--    position: relative;
--    height: auto;
--    line-height: auto;
--
--    &-btn {
--      text-align: right;
--    }
--
--    .@{calendar-prefix-cls}-today-btn {
--      float: left;
--      margin: 0;
--    }
--
--    .@{calendar-prefix-cls}-time-picker-btn {
--      display: inline-block;
--      margin-right: 8px;
--
--      &-disabled {
--        color: @disabled-color;
--      }
--    }
--  }
--}
++    color: @text-color;
+     line-height: 34px;
+   }
+ 
 diff -ruNa ant-design-master/components/date-picker/style/WeekPicker.less ng-zorro-antd-master/components/date-picker/style/WeekPicker.less
---- ant-design-master/components/date-picker/style/WeekPicker.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/date-picker/style/WeekPicker.less	2017-12-28 10:51:12.000000000 +0800
 +++ ng-zorro-antd-master/components/date-picker/style/WeekPicker.less	1970-01-01 08:00:00.000000000 +0800
 @@ -1,21 +0,0 @@
 -.@{calendar-prefix-cls}-week-number {
@@ -2317,1177 +1928,39 @@ diff -ruNa ant-design-master/components/date-picker/style/WeekPicker.less ng-zor
 -  }
 -}
 diff -ruNa ant-design-master/components/date-picker/style/YearPanel.less ng-zorro-antd-master/components/date-picker/style/YearPanel.less
---- ant-design-master/components/date-picker/style/YearPanel.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/date-picker/style/YearPanel.less	1970-01-01 08:00:00.000000000 +0800
-@@ -1,74 +0,0 @@
--.@{calendar-prefix-cls}-year-panel {
--  position: absolute;
--  top: 1px;
--  right: 0;
--  bottom: 0;
--  left: 0;
--  z-index: 10;
--  border-radius: @border-radius-base;
--  background: @component-background;
--  outline: none;
--
--  > div { // TODO: this is a useless wrapper, and we need to remove it in rc-calendar
--    height: 100%;
--  }
--}
--
--.@{calendar-prefix-cls}-year-panel-hidden {
--  display: none;
--}
--
--.@{calendar-prefix-cls}-year-panel-header {
--  .calendarPanelHeader(~"@{calendar-prefix-cls}-year-panel");
--}
--
--.@{calendar-prefix-cls}-year-panel-body {
+--- ant-design-master/components/date-picker/style/YearPanel.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/date-picker/style/YearPanel.less	2017-12-21 14:44:18.000000000 +0800
+@@ -23,7 +23,7 @@
+ }
+ 
+ .@{calendar-prefix-cls}-year-panel-body {
 -  height: ~"calc(100% - 40px)";
--}
--
--.@{calendar-prefix-cls}-year-panel-table {
--  table-layout: fixed;
--  width: 100%;
--  height: 100%;
--  border-collapse: separate;
--}
--
--.@{calendar-prefix-cls}-year-panel-cell {
--  text-align: center;
--}
--
--.@{calendar-prefix-cls}-year-panel-year {
--  display: inline-block;
--  margin: 0 auto;
--  color: @text-color;
--  background: transparent;
--  text-align: center;
--  height: 24px;
--  line-height: 24px;
++  height: ~"calc(100% - 34px)";
+ }
+ 
+ .@{calendar-prefix-cls}-year-panel-table {
+@@ -45,8 +45,8 @@
+   text-align: center;
+   height: 24px;
+   line-height: 24px;
 -  padding: 0 8px;
 -  border-radius: @border-radius-sm;
--  transition: background 0.3s ease;
--
--  &:hover {
--    background: @item-hover-bg;
--    cursor: pointer;
--  }
--}
--
--.@{calendar-prefix-cls}-year-panel-selected-cell .@{calendar-prefix-cls}-year-panel-year {
--  background: @primary-color;
--  color: #fff;
--
--  &:hover {
--    background: @primary-color;
--    color: #fff;
--  }
--}
--
--.@{calendar-prefix-cls}-year-panel-last-decade-cell,
--.@{calendar-prefix-cls}-year-panel-next-decade-cell {
--  .@{calendar-prefix-cls}-year-panel-year {
--    user-select: none;
--    color: @disabled-color;
--  }
--}
++  padding: 0 6px;
++  border-radius: 4px;
+   transition: background 0.3s ease;
+ 
+   &:hover {
 diff -ruNa ant-design-master/components/date-picker/style/index.less ng-zorro-antd-master/components/date-picker/style/index.less
---- ant-design-master/components/date-picker/style/index.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/date-picker/style/index.less	1970-01-01 08:00:00.000000000 +0800
-@@ -1,17 +0,0 @@
--@import "../../style/themes/default";
--@import "../../style/mixins/index";
--@import "../../input/style/mixin";
--@import "../../button/style/mixin";
--
--@calendar-prefix-cls: ~"@{ant-prefix}-calendar";
--@calendar-timepicker-prefix-cls: ~"@{ant-prefix}-calendar-time-picker";
--
--@import "Picker";
--@import "Calendar";
--@import "RangePicker";
--@import "TimePicker";
--@import "MonthPanel";
--@import "YearPanel";
--@import "DecadePanel";
--@import "MonthPicker";
+--- ant-design-master/components/date-picker/style/index.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/date-picker/style/index.less	2017-12-21 14:44:18.000000000 +0800
+@@ -14,4 +14,3 @@
+ @import "YearPanel";
+ @import "DecadePanel";
+ @import "MonthPicker";
 -@import "WeekPicker";
-diff -ruNa ant-design-master/components/datepicker/style/Calendar.less ng-zorro-antd-master/components/datepicker/style/Calendar.less
---- ant-design-master/components/datepicker/style/Calendar.less	1970-01-01 08:00:00.000000000 +0800
-+++ ng-zorro-antd-master/components/datepicker/style/Calendar.less	2017-12-24 22:37:17.000000000 +0800
-@@ -0,0 +1,334 @@
-+.calendarPanelHeader(@calendar-prefix-cls) {
-+  height: 34px;
-+  line-height: 34px;
-+  text-align: center;
-+  user-select: none;
-+  border-bottom: @border-width-base @border-style-base @border-color-split;
-+
-+  a:hover {
-+    color: @link-hover-color;
-+  }
-+
-+  .@{calendar-prefix-cls}-century-select,
-+  .@{calendar-prefix-cls}-decade-select,
-+  .@{calendar-prefix-cls}-year-select,
-+  .@{calendar-prefix-cls}-month-select {
-+    padding: 0 2px;
-+    font-weight: bold;
-+    display: inline-block;
-+    color: @text-color;
-+    line-height: 34px;
-+  }
-+
-+  .@{calendar-prefix-cls}-century-select-arrow,
-+  .@{calendar-prefix-cls}-decade-select-arrow,
-+  .@{calendar-prefix-cls}-year-select-arrow,
-+  .@{calendar-prefix-cls}-month-select-arrow {
-+    display: none;
-+  }
-+
-+  .@{calendar-prefix-cls}-prev-century-btn,
-+  .@{calendar-prefix-cls}-next-century-btn,
-+  .@{calendar-prefix-cls}-prev-decade-btn,
-+  .@{calendar-prefix-cls}-next-decade-btn,
-+  .@{calendar-prefix-cls}-prev-month-btn,
-+  .@{calendar-prefix-cls}-next-month-btn,
-+  .@{calendar-prefix-cls}-prev-year-btn,
-+  .@{calendar-prefix-cls}-next-year-btn {
-+    position: absolute;
-+    top: 0;
-+    color: @text-color-secondary;
-+    font-family: Arial, "Hiragino Sans GB", "Microsoft Yahei", "Microsoft Sans Serif", sans-serif;
-+    padding: 0 5px;
-+    font-size: 16px;
-+    display: inline-block;
-+    line-height: 34px;
-+  }
-+
-+  .@{calendar-prefix-cls}-prev-century-btn,
-+  .@{calendar-prefix-cls}-prev-decade-btn,
-+  .@{calendar-prefix-cls}-prev-year-btn {
-+    left: 7px;
-+
-+    &:after {
-+      content: '«';
-+    }
-+  }
-+
-+  .@{calendar-prefix-cls}-next-century-btn,
-+  .@{calendar-prefix-cls}-next-decade-btn,
-+  .@{calendar-prefix-cls}-next-year-btn {
-+    right: 7px;
-+
-+    &:after {
-+      content: '»';
-+    }
-+  }
-+
-+  .@{calendar-prefix-cls}-prev-month-btn {
-+    left: 29px;
-+
-+    &:after {
-+      content: '‹';
-+    }
-+  }
-+
-+  .@{calendar-prefix-cls}-next-month-btn {
-+    right: 29px;
-+
-+    &:after {
-+      content: '›';
-+    }
-+  }
-+}
-+
-+.@{calendar-prefix-cls} {
-+  position: relative;
-+  outline: none;
-+  width: 231px;
-+  border: @border-width-base @border-style-base #fff;
-+  list-style: none;
-+  font-size: @font-size-base;
-+  text-align: left;
-+  background-color: @component-background;
-+  border-radius: @border-radius-base;
-+  box-shadow: @box-shadow-base;
-+  background-clip: padding-box;
-+  line-height: @line-height-base;
-+
-+  &-input-wrap {
-+    height: 34px;
-+    padding: 6px;
-+    border-bottom: @border-width-base @border-style-base @border-color-split;
-+  }
-+
-+  &-input {
-+    border: 0;
-+    width: 100%;
-+    cursor: auto;
-+    outline: 0;
-+    height: 22px;
-+    color: @input-color;
-+    background: @input-bg;
-+    .placeholder;
-+  }
-+
-+  &-week-number {
-+    width: 286px;
-+
-+    &-cell {
-+      text-align: center;
-+    }
-+  }
-+
-+  &-header {
-+    .calendarPanelHeader(@calendar-prefix-cls);
-+  }
-+
-+  &-body {
-+    padding: 4px 8px;
-+  }
-+
-+  table {
-+    border-collapse: collapse;
-+    max-width: 100%;
-+    background-color: transparent;
-+    width: 100%;
-+  }
-+
-+  table,
-+  th,
-+  td {
-+    border: 0;
-+  }
-+
-+  &-calendar-table {
-+    border-spacing: 0;
-+    margin-bottom: 0;
-+  }
-+
-+  &-column-header {
-+    line-height: 18px;
-+    width: 33px;
-+    padding: 6px 0;
-+    text-align: center;
-+    .@{calendar-prefix-cls}-column-header-inner {
-+      display: block;
-+      font-weight: normal;
-+    }
-+  }
-+
-+  &-week-number-header {
-+    .@{calendar-prefix-cls}-column-header-inner {
-+      display: none;
-+    }
-+  }
-+
-+  &-cell {
-+    padding: 4px 0;
-+  }
-+
-+  &-date {
-+    display: block;
-+    margin: 0 auto;
-+    color: @text-color;
-+    border-radius: @border-radius-sm;
-+    width: 20px;
-+    height: 20px;
-+    line-height: 18px;
-+    border: @border-width-base @border-style-base transparent;
-+    padding: 0;
-+    background: transparent;
-+    text-align: center;
-+    transition: background 0.3s ease;
-+
-+    &-panel {
-+      position: relative;
-+    }
-+
-+    &:hover {
-+      background: @item-hover-bg;
-+      cursor: pointer;
-+    }
-+
-+    &:active {
-+      color: #fff;
-+      background: @primary-5;
-+    }
-+  }
-+
-+  &-today &-date {
-+    border-color: @primary-color;
-+    font-weight: bold;
-+    color: @primary-color;
-+  }
-+
-+  &-last-month-cell &-date,
-+  &-next-month-btn-day &-date {
-+    color: @disabled-color;
-+  }
-+
-+  &-selected-day &-date {
-+    background: @primary-color;
-+    color: #fff;
-+    border: @border-width-base @border-style-base transparent;
-+
-+    &:hover {
-+      background: @primary-color;
-+    }
-+  }
-+
-+  &-disabled-cell &-date {
-+    cursor: not-allowed;
-+    color: #bcbcbc;
-+    background: @disabled-bg;
-+    border-radius: 0;
-+    width: auto;
-+    border: @border-width-base @border-style-base transparent;
-+
-+    &:hover {
-+      background: @disabled-bg;
-+    }
-+  }
-+  &-disabled-cell&-today &-date {
-+    position: relative;
-+    margin-right: 5px;
-+    padding-left: 5px;
-+    &:before {
-+      content: " ";
-+      position: absolute;
-+      top: -1px;
-+      left: 5px;
-+      width: 20px;
-+      height: 20px;
-+      border: @border-width-base @border-style-base #bcbcbc;
-+      border-radius: @border-radius-base;
-+    }
-+  }
-+
-+  &-disabled-cell-first-of-row &-date {
-+    border-top-left-radius: 4px;
-+    border-bottom-left-radius: 4px;
-+  }
-+
-+  &-disabled-cell-last-of-row &-date {
-+    border-top-right-radius: 4px;
-+    border-bottom-right-radius: 4px;
-+  }
-+
-+  &-footer {
-+    border-top: @border-width-base @border-style-base @border-color-split;
-+    line-height: 38px;
-+    padding: 0 12px;
-+    &:empty {
-+      border-top: 0;
-+    }
-+    &-btn {
-+      text-align: center;
-+      display: block;
-+    }
-+    &-extra + &-btn {
-+      border-top: @border-width-base @border-style-base @border-color-split;
-+      margin: 0 -12px;
-+      padding: 0 12px;
-+    }
-+  }
-+
-+  .@{calendar-prefix-cls}-today-btn,
-+  .@{calendar-prefix-cls}-clear-btn {
-+    display: inline-block;
-+    text-align: center;
-+    margin: 0 0 0 8px;
-+    &-disabled {
-+      color: @disabled-color;
-+      cursor: not-allowed;
-+    }
-+    &:only-child {
-+      margin: 0;
-+    }
-+  }
-+
-+  .@{calendar-prefix-cls}-clear-btn {
-+    display: none;
-+    position: absolute;
-+    right: 5px;
-+    text-indent: -76px;
-+    overflow: hidden;
-+    width: 20px;
-+    height: 20px;
-+    text-align: center;
-+    line-height: 20px;
-+    top: 7px;
-+    margin: 0;
-+  }
-+
-+  .@{calendar-prefix-cls}-clear-btn:after {
-+    .iconfont-font("\e62e");
-+    font-size: @font-size-base;
-+    color: @disabled-color;
-+    display: inline-block;
-+    line-height: 1;
-+    width: 20px;
-+    text-indent: 43px;
-+    transition: color 0.3s ease;
-+  }
-+
-+  .@{calendar-prefix-cls}-clear-btn:hover:after {
-+    color: @text-color-secondary;
-+  }
-+
-+  .@{calendar-prefix-cls}-ok-btn {
-+    .btn;
-+    .btn-primary;
-+    .button-size(@btn-height-sm; @btn-padding-sm; @font-size-base; @border-radius-base);
-+    line-height: @btn-height-sm - 2px;
-+
-+    &-disabled {
-+      .button-color(@btn-disable-color; @btn-disable-bg; @btn-disable-border);
-+      cursor: not-allowed;
-+      &:hover {
-+        .button-color(@btn-disable-color; @btn-disable-bg; @btn-disable-border);
-+      }
-+    }
-+  }
-+}
-diff -ruNa ant-design-master/components/datepicker/style/DecadePanel.less ng-zorro-antd-master/components/datepicker/style/DecadePanel.less
---- ant-design-master/components/datepicker/style/DecadePanel.less	1970-01-01 08:00:00.000000000 +0800
-+++ ng-zorro-antd-master/components/datepicker/style/DecadePanel.less	2017-12-24 22:37:17.000000000 +0800
-@@ -0,0 +1,71 @@
-+.@{calendar-prefix-cls}-decade-panel {
-+  position: absolute;
-+  top: 0;
-+  right: 0;
-+  bottom: 0;
-+  left: 0;
-+  z-index: 10;
-+  background: @component-background;
-+  border-radius: @border-radius-base;
-+  outline: none;
-+}
-+
-+.@{calendar-prefix-cls}-decade-panel-hidden {
-+  display: none;
-+}
-+
-+.@{calendar-prefix-cls}-decade-panel-header {
-+  .calendarPanelHeader(~"@{calendar-prefix-cls}-decade-panel");
-+}
-+
-+.@{calendar-prefix-cls}-decade-panel-body {
-+  height: ~"calc(100% - 34px)";
-+}
-+
-+.@{calendar-prefix-cls}-decade-panel-table {
-+  table-layout: fixed;
-+  width: 100%;
-+  height: 100%;
-+  border-collapse: separate;
-+}
-+
-+.@{calendar-prefix-cls}-decade-panel-cell {
-+  text-align: center;
-+  white-space: nowrap;
-+}
-+
-+.@{calendar-prefix-cls}-decade-panel-decade {
-+  display: inline-block;
-+  margin: 0 auto;
-+  color: @text-color;
-+  background: transparent;
-+  text-align: center;
-+  height: 24px;
-+  line-height: 24px;
-+  padding: 0 6px;
-+  border-radius: 4px;
-+  transition: background 0.3s ease;
-+
-+  &:hover {
-+    background: @item-hover-bg;
-+    cursor: pointer;
-+  }
-+}
-+
-+.@{calendar-prefix-cls}-decade-panel-selected-cell .@{calendar-prefix-cls}-decade-panel-decade {
-+  background: @primary-color;
-+  color: #fff;
-+
-+  &:hover {
-+    background: @primary-color;
-+    color: #fff;
-+  }
-+}
-+
-+.@{calendar-prefix-cls}-decade-panel-last-century-cell,
-+.@{calendar-prefix-cls}-decade-panel-next-century-cell {
-+  .@{calendar-prefix-cls}-decade-panel-decade {
-+    user-select: none;
-+    color: @disabled-color;
-+  }
-+}
-diff -ruNa ant-design-master/components/datepicker/style/MonthPanel.less ng-zorro-antd-master/components/datepicker/style/MonthPanel.less
---- ant-design-master/components/datepicker/style/MonthPanel.less	1970-01-01 08:00:00.000000000 +0800
-+++ ng-zorro-antd-master/components/datepicker/style/MonthPanel.less	2017-12-24 22:37:17.000000000 +0800
-@@ -0,0 +1,75 @@
-+.@{calendar-prefix-cls}-month-panel {
-+  position: absolute;
-+  top: 1px;
-+  right: 0;
-+  bottom: 0;
-+  left: 0;
-+  z-index: 10;
-+  border-radius: @border-radius-base;
-+  background: @component-background;
-+  outline: none;
-+
-+  > div { // TODO: this is a useless wrapper, and we need to remove it in rc-calendar
-+    height: 100%;
-+  }
-+}
-+
-+.@{calendar-prefix-cls}-month-panel-hidden {
-+  display: none;
-+}
-+
-+.@{calendar-prefix-cls}-month-panel-header {
-+  .calendarPanelHeader(~"@{calendar-prefix-cls}-month-panel");
-+}
-+
-+.@{calendar-prefix-cls}-month-panel-body {
-+  height: ~"calc(100% - 34px)";
-+}
-+
-+.@{calendar-prefix-cls}-month-panel-table {
-+  table-layout: fixed;
-+  width: 100%;
-+  height: 100%;
-+  border-collapse: separate;
-+}
-+
-+.@{calendar-prefix-cls}-month-panel-selected-cell .@{calendar-prefix-cls}-month-panel-month {
-+  background: @primary-color;
-+  color: #fff;
-+
-+  &:hover {
-+    background: @primary-color;
-+    color: #fff;
-+  }
-+}
-+
-+.@{calendar-prefix-cls}-month-panel-cell {
-+  text-align: center;
-+
-+  &-disabled .@{calendar-prefix-cls}-month-panel-month {
-+    &,
-+    &:hover {
-+      cursor: not-allowed;
-+      color: #bcbcbc;
-+      background: @disabled-bg;
-+    }
-+  }
-+}
-+
-+.@{calendar-prefix-cls}-month-panel-month {
-+  display: inline-block;
-+  margin: 0 auto;
-+  color: @text-color;
-+  background: transparent;
-+  text-align: center;
-+  height: 24px;
-+  line-height: 24px;
-+  padding: 0 6px;
-+  border-radius: 4px;
-+  transition: background 0.3s ease;
-+
-+  &:hover {
-+    background: @item-hover-bg;
-+    cursor: pointer;
-+  }
-+}
-diff -ruNa ant-design-master/components/datepicker/style/MonthPicker.less ng-zorro-antd-master/components/datepicker/style/MonthPicker.less
---- ant-design-master/components/datepicker/style/MonthPicker.less	1970-01-01 08:00:00.000000000 +0800
-+++ ng-zorro-antd-master/components/datepicker/style/MonthPicker.less	2017-12-24 22:37:17.000000000 +0800
-@@ -0,0 +1,7 @@
-+.@{calendar-prefix-cls}-month {
-+  .@{calendar-prefix-cls}-month-panel,
-+  .@{calendar-prefix-cls}-year-panel {
-+    top: 0;
-+    height: 248px;
-+  }
-+}
-diff -ruNa ant-design-master/components/datepicker/style/Picker.less ng-zorro-antd-master/components/datepicker/style/Picker.less
---- ant-design-master/components/datepicker/style/Picker.less	1970-01-01 08:00:00.000000000 +0800
-+++ ng-zorro-antd-master/components/datepicker/style/Picker.less	2017-12-24 22:37:17.000000000 +0800
-@@ -0,0 +1,88 @@
-+.@{calendar-prefix-cls}-picker-container {
-+  position: absolute;
-+  z-index: @zindex-picker;
-+
-+  &.slide-up-enter.slide-up-enter-active&-placement-topLeft,
-+  &.slide-up-enter.slide-up-enter-active&-placement-topRight,
-+  &.slide-up-appear.slide-up-appear-active&-placement-topLeft,
-+  &.slide-up-appear.slide-up-appear-active&-placement-topRight {
-+    animation-name: antSlideDownIn;
-+  }
-+
-+  &.slide-up-enter.slide-up-enter-active&-placement-bottomLeft,
-+  &.slide-up-enter.slide-up-enter-active&-placement-bottomRight,
-+  &.slide-up-appear.slide-up-appear-active&-placement-bottomLeft,
-+  &.slide-up-appear.slide-up-appear-active&-placement-bottomRight {
-+    animation-name: antSlideUpIn;
-+  }
-+
-+  &.slide-up-leave.slide-up-leave-active&-placement-topLeft,
-+  &.slide-up-leave.slide-up-leave-active&-placement-topRight {
-+    animation-name: antSlideDownOut;
-+  }
-+
-+  &.slide-up-leave.slide-up-leave-active&-placement-bottomLeft,
-+  &.slide-up-leave.slide-up-leave-active&-placement-bottomRight {
-+    animation-name: antSlideUpOut;
-+  }
-+}
-+
-+.@{calendar-prefix-cls}-picker {
-+  position: relative;
-+  display: inline-block;
-+  outline: none;
-+  font-size: @font-size-base;
-+  transition: opacity 0.3s;
-+
-+  &-input {
-+    outline: none;
-+    display: block;
-+  }
-+
-+  &:hover &-input:not(.@{ant-prefix}-input-disabled) {
-+    border-color: @primary-color;
-+  }
-+
-+  &-clear,
-+  &-icon {
-+    position: absolute;
-+    width: 14px;
-+    height: 14px;
-+    right: 8px;
-+    top: 50%;
-+    margin-top: -7px;
-+    line-height: 14px;
-+    font-size: @font-size-base;
-+    transition: all .3s;
-+    user-select: none;
-+  }
-+
-+  &-clear {
-+    opacity: 0;
-+    z-index: 1;
-+    color: @disabled-color;
-+    background: @input-bg;
-+    pointer-events: none;
-+    cursor: pointer;
-+    &:hover {
-+      color: @text-color-secondary;
-+    }
-+  }
-+
-+  &:hover &-clear {
-+    opacity: 1;
-+    pointer-events: auto;
-+  }
-+
-+  &-icon {
-+    color: @text-color-secondary;
-+    &:after {
-+      content: "\e6bb";
-+      font-family: "anticon";
-+      font-size: @font-size-base;
-+      color: @text-color-secondary;
-+      display: inline-block;
-+      line-height: 1;
-+    }
-+  }
-+}
-diff -ruNa ant-design-master/components/datepicker/style/RangePicker.less ng-zorro-antd-master/components/datepicker/style/RangePicker.less
---- ant-design-master/components/datepicker/style/RangePicker.less	1970-01-01 08:00:00.000000000 +0800
-+++ ng-zorro-antd-master/components/datepicker/style/RangePicker.less	2017-12-24 22:37:17.000000000 +0800
-@@ -0,0 +1,220 @@
-+@input-box-height: 34px;
-+
-+.@{calendar-prefix-cls}-range-picker-input {
-+  background-color: transparent;
-+  border: 0;
-+  height: 99%;
-+  outline: 0;
-+  width: 43%;
-+  text-align: center;
-+  vertical-align: top;
-+  .placeholder();
-+
-+  &[disabled] {
-+    cursor: not-allowed;
-+  }
-+}
-+
-+.@{calendar-prefix-cls}-range-picker-separator {
-+  color: @text-color-secondary;
-+  width: 8px;
-+  display: inline-block;
-+  line-height: 18px;
-+  vertical-align: top;
-+}
-+
-+.@{calendar-prefix-cls}-range {
-+  width: 470px;
-+  overflow: hidden;
-+
-+  .@{calendar-prefix-cls}-date-panel {
-+    &::after {
-+      content: ".";
-+      display: block;
-+      height: 0;
-+      clear: both;
-+      visibility: hidden;
-+    }
-+  }
-+  &-part {
-+    width: 50%;
-+    position: relative;
-+  }
-+
-+  &-left {
-+    float: left;
-+    .@{calendar-prefix-cls} {
-+      &-time-picker-inner {
-+        border-right: 2px solid @border-color-split;
-+      }
-+    }
-+  }
-+
-+  &-right {
-+    float: right;
-+    .@{calendar-prefix-cls} {
-+      &-time-picker-inner {
-+        border-left: 2px solid @border-color-split;
-+      }
-+    }
-+  }
-+
-+  &-middle {
-+    position: absolute;
-+    left: 50%;
-+    width: 20px;
-+    margin-left: -132px;
-+    text-align: center;
-+    height: @input-box-height;
-+    line-height: @input-box-height;
-+    color: @text-color-secondary;
-+  }
-+
-+  &-right .@{calendar-prefix-cls}-date-input-wrap {
-+    margin-left: -118px;
-+  }
-+
-+  &.@{calendar-prefix-cls}-time &-middle {
-+    margin-left: -12px;
-+  }
-+
-+  &.@{calendar-prefix-cls}-time &-right .@{calendar-prefix-cls}-date-input-wrap {
-+    margin-left: 0;
-+  }
-+
-+  .@{calendar-prefix-cls}-input-wrap {
-+    position: relative;
-+    height: @input-box-height;
-+  }
-+
-+  .@{calendar-prefix-cls}-input,
-+  .@{calendar-timepicker-prefix-cls}-input {
-+    .input;
-+    height: @input-height-sm;
-+    border: 0;
-+    box-shadow: none;
-+
-+    &:focus {
-+      box-shadow: none;
-+    }
-+  }
-+
-+  .@{calendar-timepicker-prefix-cls}-icon {
-+    display: none;
-+  }
-+
-+  &.@{calendar-prefix-cls}-week-number {
-+    width: 574px;
-+
-+    .@{calendar-prefix-cls}-range-part {
-+      width: 286px;
-+    }
-+  }
-+
-+  .@{calendar-prefix-cls}-year-panel,
-+  .@{calendar-prefix-cls}-month-panel {
-+    top: @input-box-height;
-+  }
-+  .@{calendar-prefix-cls}-month-panel .@{calendar-prefix-cls}-year-panel {
-+    top: 0;
-+  }
-+  .@{calendar-prefix-cls}-decade-panel-table,
-+  .@{calendar-prefix-cls}-year-panel-table,
-+  .@{calendar-prefix-cls}-month-panel-table {
-+    height: 208px;
-+  }
-+
-+  .@{calendar-prefix-cls}-in-range-cell {
-+    border-radius: 0;
-+    position: relative;
-+    > div {
-+      position: relative;
-+      z-index: 1;
-+    }
-+    &:before {
-+      content: '';
-+      display: block;
-+      background: @item-active-bg;
-+      border-radius: 0;
-+      border: 0;
-+      position: absolute;
-+      top: 4px;
-+      bottom: 4px;
-+      left: 0;
-+      right: 0;
-+    }
-+  }
-+
-+  // `div` for selector specificity
-+  div&-quick-selector {
-+    text-align: left;
-+
-+    > a {
-+      margin-right: 8px;
-+    }
-+  }
-+
-+  .@{calendar-prefix-cls},
-+  .@{calendar-prefix-cls}-month-panel,
-+  .@{calendar-prefix-cls}-year-panel {
-+    &-header {
-+      border-bottom: 0;
-+    }
-+    &-body {
-+      border-top: @border-width-base @border-style-base @border-color-split;
-+    }
-+  }
-+
-+  &.@{calendar-prefix-cls}-time {
-+    .@{calendar-timepicker-prefix-cls} {
-+      height: 207px;
-+      width: 100%;
-+      top: 68px;
-+      z-index: 2; // cover .ant-calendar-range .ant-calendar-in-range-cell > div (z-index: 1)
-+      &-panel {
-+        height: 241px;
-+        margin-top: -34px;
-+      }
-+
-+      &-inner {
-+        padding-top: 34px;
-+        height: 100%;
-+        background: none;
-+      }
-+
-+      &-combobox {
-+        display: inline-block;
-+        height: 100%;
-+        background-color: @component-background;
-+        border-top: @border-width-base @border-style-base @border-color-split;
-+      }
-+      &-select {
-+        height: 100%;
-+        ul {
-+          max-height: 100%;
-+        }
-+      }
-+    }
-+    .@{calendar-prefix-cls}-footer .@{calendar-prefix-cls}-time-picker-btn {
-+      margin-right: 8px;
-+    }
-+    .@{calendar-prefix-cls}-today-btn {
-+      margin: 8px 12px;
-+      height: 22px;
-+      line-height: 22px;
-+    }
-+  }
-+
-+  &-with-ranges.@{calendar-prefix-cls}-time .@{calendar-timepicker-prefix-cls} {
-+    height: 247px;
-+    &-panel {
-+      height: 281px;
-+    }
-+  }
-+}
-+
-+.@{calendar-prefix-cls}-range.@{calendar-prefix-cls}-show-time-picker {
-+  .@{calendar-prefix-cls}-body {
-+    border-top-color: transparent;
-+  }
-+}
-diff -ruNa ant-design-master/components/datepicker/style/TimePicker.less ng-zorro-antd-master/components/datepicker/style/TimePicker.less
---- ant-design-master/components/datepicker/style/TimePicker.less	1970-01-01 08:00:00.000000000 +0800
-+++ ng-zorro-antd-master/components/datepicker/style/TimePicker.less	2017-12-24 22:37:17.000000000 +0800
-@@ -0,0 +1,149 @@
-+.@{calendar-timepicker-prefix-cls} {
-+  position: absolute;
-+  width: 100%;
-+  top: 34px;
-+  background-color: @component-background;
-+
-+  &-panel {
-+    z-index: @zindex-picker;
-+    position: absolute;
-+    width: 100%;
-+  }
-+
-+  &-inner {
-+    display: inline-block;
-+    position: relative;
-+    outline: none;
-+    list-style: none;
-+    font-size: @font-size-base;
-+    text-align: left;
-+    background-color: @component-background;
-+    background-clip: padding-box;
-+    line-height: 1.5;
-+    overflow: hidden;
-+    width: 100%;
-+  }
-+  &-combobox {
-+    width: 100%;
-+  }
-+
-+  &-column-1,
-+  &-column-1 &-select {
-+    width: 100%;
-+  }
-+  &-column-2 &-select {
-+    width: 50%;
-+  }
-+  &-column-3 &-select {
-+    width: 33.33%;
-+  }
-+  &-column-4 &-select {
-+    width: 25%;
-+  }
-+
-+  &-input-wrap {
-+    display: none;
-+  }
-+
-+  &-select {
-+    float: left;
-+    font-size: @font-size-base;
-+    border-right: @border-width-base @border-style-base @border-color-split;
-+    box-sizing: border-box;
-+    overflow: hidden;
-+    position: relative; // Fix chrome weird render bug
-+    height: 206px;
-+
-+    &:hover {
-+      overflow-y: auto;
-+    }
-+
-+    &:first-child {
-+      border-left: 0;
-+      margin-left: 0;
-+    }
-+
-+    &:last-child {
-+      border-right: 0;
-+    }
-+
-+    ul {
-+      list-style: none;
-+      box-sizing: border-box;
-+      margin: 0;
-+      padding: 0;
-+      width: 100%;
-+      max-height: 206px;
-+    }
-+
-+    li {
-+      text-align: center;
-+      list-style: none;
-+      box-sizing: content-box;
-+      margin: 0;
-+      width: 100%;
-+      height: 24px;
-+      line-height: 24px;
-+      cursor: pointer;
-+      user-select: none;
-+      transition: background 0.3s ease;
-+    }
-+
-+    li:last-child:after {
-+      content: '';
-+      height: 182px;
-+      display: block;
-+    }
-+
-+    li:hover {
-+      background: @item-hover-bg;
-+    }
-+
-+    li&-option-selected {
-+      background: @time-picker-selected-bg;
-+      font-weight: bold;
-+    }
-+
-+    li&-option-disabled {
-+      color: @btn-disable-color;
-+      &:hover {
-+        background: transparent;
-+        cursor: not-allowed;
-+      }
-+    }
-+  }
-+}
-+
-+.@{calendar-prefix-cls}-time {
-+  .@{calendar-prefix-cls}-day-select {
-+    padding: 0 2px;
-+    font-weight: bold;
-+    display: inline-block;
-+    color: @text-color;
-+    line-height: 34px;
-+  }
-+
-+  .@{calendar-prefix-cls}-footer {
-+    position: relative;
-+    height: auto;
-+    line-height: auto;
-+
-+    &-btn {
-+      text-align: right;
-+    }
-+
-+    .@{calendar-prefix-cls}-today-btn {
-+      float: left;
-+      margin: 0;
-+    }
-+
-+    .@{calendar-prefix-cls}-time-picker-btn {
-+      display: inline-block;
-+      margin-right: 8px;
-+
-+      &-disabled {
-+        color: @disabled-color;
-+      }
-+    }
-+  }
-+}
-diff -ruNa ant-design-master/components/datepicker/style/YearPanel.less ng-zorro-antd-master/components/datepicker/style/YearPanel.less
---- ant-design-master/components/datepicker/style/YearPanel.less	1970-01-01 08:00:00.000000000 +0800
-+++ ng-zorro-antd-master/components/datepicker/style/YearPanel.less	2017-12-24 22:37:17.000000000 +0800
-@@ -0,0 +1,74 @@
-+.@{calendar-prefix-cls}-year-panel {
-+  position: absolute;
-+  top: 1px;
-+  right: 0;
-+  bottom: 0;
-+  left: 0;
-+  z-index: 10;
-+  border-radius: @border-radius-base;
-+  background: @component-background;
-+  outline: none;
-+
-+  > div { // TODO: this is a useless wrapper, and we need to remove it in rc-calendar
-+    height: 100%;
-+  }
-+}
-+
-+.@{calendar-prefix-cls}-year-panel-hidden {
-+  display: none;
-+}
-+
-+.@{calendar-prefix-cls}-year-panel-header {
-+  .calendarPanelHeader(~"@{calendar-prefix-cls}-year-panel");
-+}
-+
-+.@{calendar-prefix-cls}-year-panel-body {
-+  height: ~"calc(100% - 34px)";
-+}
-+
-+.@{calendar-prefix-cls}-year-panel-table {
-+  table-layout: fixed;
-+  width: 100%;
-+  height: 100%;
-+  border-collapse: separate;
-+}
-+
-+.@{calendar-prefix-cls}-year-panel-cell {
-+  text-align: center;
-+}
-+
-+.@{calendar-prefix-cls}-year-panel-year {
-+  display: inline-block;
-+  margin: 0 auto;
-+  color: @text-color;
-+  background: transparent;
-+  text-align: center;
-+  height: 24px;
-+  line-height: 24px;
-+  padding: 0 6px;
-+  border-radius: 4px;
-+  transition: background 0.3s ease;
-+
-+  &:hover {
-+    background: @item-hover-bg;
-+    cursor: pointer;
-+  }
-+}
-+
-+.@{calendar-prefix-cls}-year-panel-selected-cell .@{calendar-prefix-cls}-year-panel-year {
-+  background: @primary-color;
-+  color: #fff;
-+
-+  &:hover {
-+    background: @primary-color;
-+    color: #fff;
-+  }
-+}
-+
-+.@{calendar-prefix-cls}-year-panel-last-decade-cell,
-+.@{calendar-prefix-cls}-year-panel-next-decade-cell {
-+  .@{calendar-prefix-cls}-year-panel-year {
-+    user-select: none;
-+    color: @disabled-color;
-+  }
-+}
-diff -ruNa ant-design-master/components/datepicker/style/index.less ng-zorro-antd-master/components/datepicker/style/index.less
---- ant-design-master/components/datepicker/style/index.less	1970-01-01 08:00:00.000000000 +0800
-+++ ng-zorro-antd-master/components/datepicker/style/index.less	2017-12-24 22:37:17.000000000 +0800
-@@ -0,0 +1,16 @@
-+@import "../../style/themes/default";
-+@import "../../style/mixins/index";
-+@import "../../input/style/mixin";
-+@import "../../button/style/mixin";
-+
-+@calendar-prefix-cls: ~"@{ant-prefix}-calendar";
-+@calendar-timepicker-prefix-cls: ~"@{ant-prefix}-calendar-time-picker";
-+
-+@import "Picker";
-+@import "Calendar";
-+@import "RangePicker";
-+@import "TimePicker";
-+@import "MonthPanel";
-+@import "YearPanel";
-+@import "DecadePanel";
-+@import "MonthPicker";
-diff -ruNa ant-design-master/components/datepicker/style/patch.less ng-zorro-antd-master/components/datepicker/style/patch.less
---- ant-design-master/components/datepicker/style/patch.less	1970-01-01 08:00:00.000000000 +0800
-+++ ng-zorro-antd-master/components/datepicker/style/patch.less	2017-12-24 22:37:17.000000000 +0800
+diff -ruNa ant-design-master/components/date-picker/style/patch.less ng-zorro-antd-master/components/date-picker/style/patch.less
+--- ant-design-master/components/date-picker/style/patch.less	1970-01-01 08:00:00.000000000 +0800
++++ ng-zorro-antd-master/components/date-picker/style/patch.less	2017-12-21 14:44:18.000000000 +0800
 @@ -0,0 +1,16 @@
 +nz-datepicker {
 +  display: inline-block;
@@ -3506,7 +1979,7 @@ diff -ruNa ant-design-master/components/datepicker/style/patch.less ng-zorro-ant
 +  }
 +}
 diff -ruNa ant-design-master/components/divider/style/index.less ng-zorro-antd-master/components/divider/style/index.less
---- ant-design-master/components/divider/style/index.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/divider/style/index.less	2017-12-28 10:51:12.000000000 +0800
 +++ ng-zorro-antd-master/components/divider/style/index.less	1970-01-01 08:00:00.000000000 +0800
 @@ -1,65 +0,0 @@
 -@import "../../style/themes/default";
@@ -3575,8 +2048,8 @@ diff -ruNa ant-design-master/components/divider/style/index.less ng-zorro-antd-m
 -  }
 -}
 diff -ruNa ant-design-master/components/dropdown/style/index.less ng-zorro-antd-master/components/dropdown/style/index.less
---- ant-design-master/components/dropdown/style/index.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/dropdown/style/index.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/dropdown/style/index.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/dropdown/style/index.less	2017-12-21 14:44:18.000000000 +0800
 @@ -4,12 +4,14 @@
  @dropdown-prefix-cls: ~"@{ant-prefix}-dropdown";
  
@@ -3701,7 +2174,7 @@ diff -ruNa ant-design-master/components/dropdown/style/index.less ng-zorro-antd-
      &:hover {
 diff -ruNa ant-design-master/components/dropdown/style/patch.less ng-zorro-antd-master/components/dropdown/style/patch.less
 --- ant-design-master/components/dropdown/style/patch.less	1970-01-01 08:00:00.000000000 +0800
-+++ ng-zorro-antd-master/components/dropdown/style/patch.less	2017-12-24 22:37:17.000000000 +0800
++++ ng-zorro-antd-master/components/dropdown/style/patch.less	2017-12-21 14:44:18.000000000 +0800
 @@ -0,0 +1,21 @@
 +@import "./index";
 +
@@ -3725,8 +2198,8 @@ diff -ruNa ant-design-master/components/dropdown/style/patch.less ng-zorro-antd-
 +  margin-bottom: 4px;
 +}
 diff -ruNa ant-design-master/components/form/style/index.less ng-zorro-antd-master/components/form/style/index.less
---- ant-design-master/components/form/style/index.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/form/style/index.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/form/style/index.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/form/style/index.less	2017-12-21 14:44:18.000000000 +0800
 @@ -6,14 +6,18 @@
  @import "./mixin";
  
@@ -4049,7 +2522,7 @@ diff -ruNa ant-design-master/components/form/style/index.less ng-zorro-antd-mast
  
 diff -ruNa ant-design-master/components/form/style/patch.less ng-zorro-antd-master/components/form/style/patch.less
 --- ant-design-master/components/form/style/patch.less	1970-01-01 08:00:00.000000000 +0800
-+++ ng-zorro-antd-master/components/form/style/patch.less	2017-12-24 22:37:17.000000000 +0800
++++ ng-zorro-antd-master/components/form/style/patch.less	2017-12-21 14:44:18.000000000 +0800
 @@ -0,0 +1,28 @@
 +@import './index.less';
 +
@@ -4080,8 +2553,8 @@ diff -ruNa ant-design-master/components/form/style/patch.less ng-zorro-antd-mast
 +  }
 +}
 diff -ruNa ant-design-master/components/grid/style/index.less ng-zorro-antd-master/components/grid/style/index.less
---- ant-design-master/components/grid/style/index.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/grid/style/index.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/grid/style/index.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/grid/style/index.less	2017-12-21 14:44:18.000000000 +0800
 @@ -6,7 +6,6 @@
  .@{ant-prefix}-row {
    .make-row();
@@ -4103,8 +2576,8 @@ diff -ruNa ant-design-master/components/grid/style/index.less ng-zorro-antd-mast
 -  .make-grid(-xxl);
 -}
 diff -ruNa ant-design-master/components/grid/style/mixin.less ng-zorro-antd-master/components/grid/style/mixin.less
---- ant-design-master/components/grid/style/mixin.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/grid/style/mixin.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/grid/style/mixin.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/grid/style/mixin.less	2017-12-21 14:44:18.000000000 +0800
 @@ -53,7 +53,6 @@
  .loop-grid-columns(@index, @class) when (@index > 0) {
    .@{ant-prefix}-col@{class}-@{index} {
@@ -4114,8 +2587,8 @@ diff -ruNa ant-design-master/components/grid/style/mixin.less ng-zorro-antd-mast
    }
    .@{ant-prefix}-col@{class}-push-@{index} {
 diff -ruNa ant-design-master/components/input/style/index.less ng-zorro-antd-master/components/input/style/index.less
---- ant-design-master/components/input/style/index.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/input/style/index.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/input/style/index.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/input/style/index.less	2017-12-21 14:44:18.000000000 +0800
 @@ -1,16 +1,15 @@
  @import "../../style/themes/default";
  @import "../../style/mixins/index";
@@ -4149,8 +2622,8 @@ diff -ruNa ant-design-master/components/input/style/index.less ng-zorro-antd-mas
 -
 -@import "./search-input";
 diff -ruNa ant-design-master/components/input/style/mixin.less ng-zorro-antd-master/components/input/style/mixin.less
---- ant-design-master/components/input/style/mixin.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/input/style/mixin.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/input/style/mixin.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/input/style/mixin.less	2017-12-21 14:44:18.000000000 +0800
 @@ -1,7 +1,7 @@
  @import "../../style/themes/default";
  @import "../../style/mixins/index";
@@ -4193,15 +2666,15 @@ diff -ruNa ant-design-master/components/input/style/mixin.less ng-zorro-antd-mas
    .@{inputClass}:not(:first-child) {
 diff -ruNa ant-design-master/components/input/style/patch.less ng-zorro-antd-master/components/input/style/patch.less
 --- ant-design-master/components/input/style/patch.less	1970-01-01 08:00:00.000000000 +0800
-+++ ng-zorro-antd-master/components/input/style/patch.less	2017-12-24 22:37:17.000000000 +0800
++++ ng-zorro-antd-master/components/input/style/patch.less	2017-12-21 14:44:18.000000000 +0800
 @@ -0,0 +1,4 @@
 +nz-input {
 +  display: inline-block;
 +  width: 100%;
 +}
 diff -ruNa ant-design-master/components/input/style/search-input.less ng-zorro-antd-master/components/input/style/search-input.less
---- ant-design-master/components/input/style/search-input.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/input/style/search-input.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/input/style/search-input.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/input/style/search-input.less	2017-12-21 14:44:18.000000000 +0800
 @@ -3,31 +3,56 @@
  @import "../../button/style/mixin";
  @import "./mixin";
@@ -4278,8 +2751,8 @@ diff -ruNa ant-design-master/components/input/style/search-input.less ng-zorro-a
    }
  }
 diff -ruNa ant-design-master/components/input-number/style/index.less ng-zorro-antd-master/components/input-number/style/index.less
---- ant-design-master/components/input-number/style/index.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/input-number/style/index.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/input-number/style/index.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/input-number/style/index.less	2017-12-21 14:44:18.000000000 +0800
 @@ -4,15 +4,22 @@
  
  @input-number-prefix-cls: ~"@{ant-prefix}-input-number";
@@ -4370,8 +2843,8 @@ diff -ruNa ant-design-master/components/input-number/style/index.less ng-zorro-a
    }
  }
 diff -ruNa ant-design-master/components/layout/style/index.less ng-zorro-antd-master/components/layout/style/index.less
---- ant-design-master/components/layout/style/index.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/layout/style/index.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/layout/style/index.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/layout/style/index.less	2017-12-21 14:44:18.000000000 +0800
 @@ -9,11 +9,6 @@
    flex: auto;
    background: @layout-body-background;
@@ -4398,7 +2871,7 @@ diff -ruNa ant-design-master/components/layout/style/index.less ng-zorro-antd-ma
      &-zero-width {
 diff -ruNa ant-design-master/components/layout/style/patch.less ng-zorro-antd-master/components/layout/style/patch.less
 --- ant-design-master/components/layout/style/patch.less	1970-01-01 08:00:00.000000000 +0800
-+++ ng-zorro-antd-master/components/layout/style/patch.less	2017-12-24 22:37:17.000000000 +0800
++++ ng-zorro-antd-master/components/layout/style/patch.less	2017-12-21 14:44:18.000000000 +0800
 @@ -0,0 +1,8 @@
 +nz-layout, nz-footer, nz-header, nz-content {
 +  display: block;
@@ -4409,7 +2882,7 @@ diff -ruNa ant-design-master/components/layout/style/patch.less ng-zorro-antd-ma
 +  position: absolute;
 +}
 diff -ruNa ant-design-master/components/list/style/bordered.less ng-zorro-antd-master/components/list/style/bordered.less
---- ant-design-master/components/list/style/bordered.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/list/style/bordered.less	2017-12-28 10:51:12.000000000 +0800
 +++ ng-zorro-antd-master/components/list/style/bordered.less	1970-01-01 08:00:00.000000000 +0800
 @@ -1,41 +0,0 @@
 -.@{list-prefix-cls}-bordered {
@@ -4454,7 +2927,7 @@ diff -ruNa ant-design-master/components/list/style/bordered.less ng-zorro-antd-m
 -  }
 -}
 diff -ruNa ant-design-master/components/list/style/index.less ng-zorro-antd-master/components/list/style/index.less
---- ant-design-master/components/list/style/index.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/list/style/index.less	2017-12-28 10:51:12.000000000 +0800
 +++ ng-zorro-antd-master/components/list/style/index.less	1970-01-01 08:00:00.000000000 +0800
 @@ -1,211 +0,0 @@
 -@import "../../style/themes/default";
@@ -4669,7 +3142,7 @@ diff -ruNa ant-design-master/components/list/style/index.less ng-zorro-antd-mast
 -@import './bordered';
 -@import './responsive';
 diff -ruNa ant-design-master/components/list/style/responsive.less ng-zorro-antd-master/components/list/style/responsive.less
---- ant-design-master/components/list/style/responsive.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/list/style/responsive.less	2017-12-28 10:51:12.000000000 +0800
 +++ ng-zorro-antd-master/components/list/style/responsive.less	1970-01-01 08:00:00.000000000 +0800
 @@ -1,42 +0,0 @@
 -@media screen and (max-width: @screen-md) {
@@ -4715,13 +3188,13 @@ diff -ruNa ant-design-master/components/list/style/responsive.less ng-zorro-antd
 -  }
 -}
 diff -ruNa ant-design-master/components/locale-provider/style/index.less ng-zorro-antd-master/components/locale-provider/style/index.less
---- ant-design-master/components/locale-provider/style/index.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/locale-provider/style/index.less	2017-12-28 10:51:12.000000000 +0800
 +++ ng-zorro-antd-master/components/locale-provider/style/index.less	1970-01-01 08:00:00.000000000 +0800
 @@ -1,2 +0,0 @@
 -// placeholder
 -@import "../../style/themes/default";
 diff -ruNa ant-design-master/components/mention/style/index.less ng-zorro-antd-master/components/mention/style/index.less
---- ant-design-master/components/mention/style/index.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/mention/style/index.less	2017-12-28 10:51:12.000000000 +0800
 +++ ng-zorro-antd-master/components/mention/style/index.less	1970-01-01 08:00:00.000000000 +0800
 @@ -1,127 +0,0 @@
 -@import "../../style/themes/default";
@@ -4852,7 +3325,7 @@ diff -ruNa ant-design-master/components/mention/style/index.less ng-zorro-antd-m
 -  }
 -}
 diff -ruNa ant-design-master/components/menu/style/dark.less ng-zorro-antd-master/components/menu/style/dark.less
---- ant-design-master/components/menu/style/dark.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/menu/style/dark.less	2017-12-28 10:51:12.000000000 +0800
 +++ ng-zorro-antd-master/components/menu/style/dark.less	1970-01-01 08:00:00.000000000 +0800
 @@ -1,118 +0,0 @@
 -.@{menu-prefix-cls} {
@@ -4974,8 +3447,8 @@ diff -ruNa ant-design-master/components/menu/style/dark.less ng-zorro-antd-maste
 -  }
 -}
 diff -ruNa ant-design-master/components/menu/style/index.less ng-zorro-antd-master/components/menu/style/index.less
---- ant-design-master/components/menu/style/index.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/menu/style/index.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/menu/style/index.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/menu/style/index.less	2017-12-21 14:44:18.000000000 +0800
 @@ -2,33 +2,29 @@
  @import "../../style/mixins/index";
  
@@ -5505,8 +3978,8 @@ diff -ruNa ant-design-master/components/menu/style/index.less ng-zorro-antd-mast
 +  }
 +}
 diff -ruNa ant-design-master/components/message/style/index.less ng-zorro-antd-master/components/message/style/index.less
---- ant-design-master/components/message/style/index.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/message/style/index.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/message/style/index.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/message/style/index.less	2017-12-21 14:44:18.000000000 +0800
 @@ -1,10 +1,9 @@
  @import "../../style/themes/default";
 -@import "../../style/mixins/index";
@@ -5529,8 +4002,8 @@ diff -ruNa ant-design-master/components/message/style/index.less ng-zorro-antd-m
      box-shadow: @shadow-2;
      background: @component-background;
 diff -ruNa ant-design-master/components/modal/style/confirm.less ng-zorro-antd-master/components/modal/style/confirm.less
---- ant-design-master/components/modal/style/confirm.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/modal/style/confirm.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/modal/style/confirm.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/modal/style/confirm.less	2017-12-21 14:44:18.000000000 +0800
 @@ -12,7 +12,7 @@
    }
  
@@ -5581,16 +4054,16 @@ diff -ruNa ant-design-master/components/modal/style/confirm.less ng-zorro-antd-m
      }
    }
 diff -ruNa ant-design-master/components/modal/style/index.less ng-zorro-antd-master/components/modal/style/index.less
---- ant-design-master/components/modal/style/index.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/modal/style/index.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/modal/style/index.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/modal/style/index.less	2017-12-21 14:44:18.000000000 +0800
 @@ -1,4 +1,3 @@
  @import "../../style/themes/default";
 -@import "../../style/mixins/index";
  @import "./modal";
  @import "./confirm";
 diff -ruNa ant-design-master/components/modal/style/modal.less ng-zorro-antd-master/components/modal/style/modal.less
---- ant-design-master/components/modal/style/modal.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/modal/style/modal.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/modal/style/modal.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/modal/style/modal.less	2017-12-21 14:44:18.000000000 +0800
 @@ -1,7 +1,6 @@
  @dialog-prefix-cls: ~"@{ant-prefix}-modal";
  
@@ -5670,8 +4143,8 @@ diff -ruNa ant-design-master/components/modal/style/modal.less ng-zorro-antd-mas
      width: auto !important;
      margin: 10px;
 diff -ruNa ant-design-master/components/notification/style/index.less ng-zorro-antd-master/components/notification/style/index.less
---- ant-design-master/components/notification/style/index.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/notification/style/index.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/notification/style/index.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/notification/style/index.less	2017-12-21 14:44:18.000000000 +0800
 @@ -2,19 +2,14 @@
  @import "../../style/mixins/index";
  
@@ -5744,8 +4217,8 @@ diff -ruNa ant-design-master/components/notification/style/index.less ng-zorro-a
          color: #404040;
        }
 diff -ruNa ant-design-master/components/pagination/style/index.less ng-zorro-antd-master/components/pagination/style/index.less
---- ant-design-master/components/pagination/style/index.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/pagination/style/index.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/pagination/style/index.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/pagination/style/index.less	2017-12-21 14:44:18.000000000 +0800
 @@ -5,14 +5,7 @@
  @pagination-prefix-cls: ~"@{ant-prefix}-pagination";
  
@@ -5988,7 +4461,7 @@ diff -ruNa ant-design-master/components/pagination/style/index.less ng-zorro-ant
 -}
 diff -ruNa ant-design-master/components/pagination/style/patch.less ng-zorro-antd-master/components/pagination/style/patch.less
 --- ant-design-master/components/pagination/style/patch.less	1970-01-01 08:00:00.000000000 +0800
-+++ ng-zorro-antd-master/components/pagination/style/patch.less	2017-12-24 22:37:17.000000000 +0800
++++ ng-zorro-antd-master/components/pagination/style/patch.less	2017-12-21 14:44:18.000000000 +0800
 @@ -0,0 +1,5 @@
 +@import "./index.less";
 +
@@ -5997,14 +4470,14 @@ diff -ruNa ant-design-master/components/pagination/style/patch.less ng-zorro-ant
 +}
 diff -ruNa ant-design-master/components/popconfirm/style/index.less ng-zorro-antd-master/components/popconfirm/style/index.less
 --- ant-design-master/components/popconfirm/style/index.less	1970-01-01 08:00:00.000000000 +0800
-+++ ng-zorro-antd-master/components/popconfirm/style/index.less	2017-12-24 22:37:17.000000000 +0800
++++ ng-zorro-antd-master/components/popconfirm/style/index.less	2017-12-21 14:44:18.000000000 +0800
 @@ -0,0 +1,3 @@
 +
 +// style dependencies
 +@import '../../popover/style/index.less';
 diff -ruNa ant-design-master/components/popconfirm/style/patch.less ng-zorro-antd-master/components/popconfirm/style/patch.less
 --- ant-design-master/components/popconfirm/style/patch.less	1970-01-01 08:00:00.000000000 +0800
-+++ ng-zorro-antd-master/components/popconfirm/style/patch.less	2017-12-24 22:37:17.000000000 +0800
++++ ng-zorro-antd-master/components/popconfirm/style/patch.less	2017-12-21 14:44:18.000000000 +0800
 @@ -0,0 +1,6 @@
 +@import "./index.less";
 +
@@ -6013,8 +4486,8 @@ diff -ruNa ant-design-master/components/popconfirm/style/patch.less ng-zorro-ant
 +  margin: 1px;
 +}
 diff -ruNa ant-design-master/components/popover/style/index.less ng-zorro-antd-master/components/popover/style/index.less
---- ant-design-master/components/popover/style/index.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/popover/style/index.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/popover/style/index.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/popover/style/index.less	2017-12-21 14:44:18.000000000 +0800
 @@ -4,7 +4,6 @@
  @popover-prefix-cls: ~"@{ant-prefix}-popover";
  
@@ -6204,7 +4677,7 @@ diff -ruNa ant-design-master/components/popover/style/index.less ng-zorro-antd-m
      top: 12px;
 diff -ruNa ant-design-master/components/popover/style/patch.less ng-zorro-antd-master/components/popover/style/patch.less
 --- ant-design-master/components/popover/style/patch.less	1970-01-01 08:00:00.000000000 +0800
-+++ ng-zorro-antd-master/components/popover/style/patch.less	2017-12-24 22:37:17.000000000 +0800
++++ ng-zorro-antd-master/components/popover/style/patch.less	2017-12-21 14:44:18.000000000 +0800
 @@ -0,0 +1,6 @@
 +@import "./index.less";
 +
@@ -6213,8 +4686,8 @@ diff -ruNa ant-design-master/components/popover/style/patch.less ng-zorro-antd-m
 +  margin: 1px;
 +}
 diff -ruNa ant-design-master/components/progress/style/index.less ng-zorro-antd-master/components/progress/style/index.less
---- ant-design-master/components/progress/style/index.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/progress/style/index.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/progress/style/index.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/progress/style/index.less	2017-12-21 14:44:18.000000000 +0800
 @@ -4,7 +4,6 @@
  @progress-prefix-cls: ~"@{ant-prefix}-progress";
  
@@ -6298,8 +4771,8 @@ diff -ruNa ant-design-master/components/progress/style/index.less ng-zorro-antd-
    0% {
      opacity: 0.1;
 diff -ruNa ant-design-master/components/radio/style/index.less ng-zorro-antd-master/components/radio/style/index.less
---- ant-design-master/components/radio/style/index.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/radio/style/index.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/radio/style/index.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/radio/style/index.less	2017-12-21 14:44:18.000000000 +0800
 @@ -1,6 +1,5 @@
  @import "../../style/themes/default";
  @import "../../style/mixins/index";
@@ -6418,8 +4891,8 @@ diff -ruNa ant-design-master/components/radio/style/index.less ng-zorro-antd-mas
      height: 0;
    }
 diff -ruNa ant-design-master/components/rate/style/index.less ng-zorro-antd-master/components/rate/style/index.less
---- ant-design-master/components/rate/style/index.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/rate/style/index.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/rate/style/index.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/rate/style/index.less	2017-12-21 14:44:18.000000000 +0800
 @@ -4,15 +4,13 @@
  @rate-prefix-cls: ~"@{ant-prefix}-rate";
  
@@ -6456,7 +4929,7 @@ diff -ruNa ant-design-master/components/rate/style/index.less ng-zorro-antd-mast
    }
 diff -ruNa ant-design-master/components/root/style/index.less ng-zorro-antd-master/components/root/style/index.less
 --- ant-design-master/components/root/style/index.less	1970-01-01 08:00:00.000000000 +0800
-+++ ng-zorro-antd-master/components/root/style/index.less	2017-12-24 22:37:17.000000000 +0800
++++ ng-zorro-antd-master/components/root/style/index.less	2017-12-21 14:44:18.000000000 +0800
 @@ -0,0 +1,33 @@
 +/**
 + * Global styles for all components (WANT antd's global style? SEE at components/style)
@@ -6492,8 +4965,8 @@ diff -ruNa ant-design-master/components/root/style/index.less ng-zorro-antd-mast
 +  z-index: 1000;
 +}
 diff -ruNa ant-design-master/components/select/style/index.less ng-zorro-antd-master/components/select/style/index.less
---- ant-design-master/components/select/style/index.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/select/style/index.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/select/style/index.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/select/style/index.less	2017-12-21 14:44:18.000000000 +0800
 @@ -13,11 +13,11 @@
    text-rendering: auto;
    opacity: 0;
@@ -6754,7 +5227,7 @@ diff -ruNa ant-design-master/components/select/style/index.less ng-zorro-antd-ma
        }
 diff -ruNa ant-design-master/components/select/style/patch.less ng-zorro-antd-master/components/select/style/patch.less
 --- ant-design-master/components/select/style/patch.less	1970-01-01 08:00:00.000000000 +0800
-+++ ng-zorro-antd-master/components/select/style/patch.less	2017-12-24 22:37:17.000000000 +0800
++++ ng-zorro-antd-master/components/select/style/patch.less	2017-12-21 14:44:18.000000000 +0800
 @@ -0,0 +1,23 @@
 +@import './index.less';
 +
@@ -6780,8 +5253,8 @@ diff -ruNa ant-design-master/components/select/style/patch.less ng-zorro-antd-ma
 +  }
 +}
 diff -ruNa ant-design-master/components/slider/style/index.less ng-zorro-antd-master/components/slider/style/index.less
---- ant-design-master/components/slider/style/index.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/slider/style/index.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/slider/style/index.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/slider/style/index.less	2017-12-21 14:44:18.000000000 +0800
 @@ -10,12 +10,10 @@
  @slider-tooltip-arrow-width: 4px;
  @slider-tooltip-distance: @slider-tooltip-arrow-width + 4px;
@@ -6857,8 +5330,8 @@ diff -ruNa ant-design-master/components/slider/style/index.less ng-zorro-antd-ma
    }
  
 diff -ruNa ant-design-master/components/spin/style/index.less ng-zorro-antd-master/components/spin/style/index.less
---- ant-design-master/components/spin/style/index.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/spin/style/index.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/spin/style/index.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/spin/style/index.less	2017-12-21 14:44:18.000000000 +0800
 @@ -5,13 +5,13 @@
  @spin-dot-default: @text-color-secondary;
  
@@ -6901,7 +5374,7 @@ diff -ruNa ant-design-master/components/spin/style/index.less ng-zorro-antd-mast
    }
  
 diff -ruNa ant-design-master/components/steps/style/custom-icon.less ng-zorro-antd-master/components/steps/style/custom-icon.less
---- ant-design-master/components/steps/style/custom-icon.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/steps/style/custom-icon.less	2017-12-28 10:51:12.000000000 +0800
 +++ ng-zorro-antd-master/components/steps/style/custom-icon.less	1970-01-01 08:00:00.000000000 +0800
 @@ -1,21 +0,0 @@
 -.@{steps-prefix-cls}-item-custom {
@@ -6926,8 +5399,8 @@ diff -ruNa ant-design-master/components/steps/style/custom-icon.less ng-zorro-an
 -  }
 -}
 diff -ruNa ant-design-master/components/steps/style/index.less ng-zorro-antd-master/components/steps/style/index.less
---- ant-design-master/components/steps/style/index.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/steps/style/index.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/steps/style/index.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/steps/style/index.less	2017-12-21 14:44:18.000000000 +0800
 @@ -2,9 +2,9 @@
  @import "../../style/mixins/index";
  
@@ -7504,7 +5977,7 @@ diff -ruNa ant-design-master/components/steps/style/index.less ng-zorro-antd-mas
 +  }
 +}
 diff -ruNa ant-design-master/components/steps/style/label-placement.less ng-zorro-antd-master/components/steps/style/label-placement.less
---- ant-design-master/components/steps/style/label-placement.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/steps/style/label-placement.less	2017-12-28 10:51:12.000000000 +0800
 +++ ng-zorro-antd-master/components/steps/style/label-placement.less	1970-01-01 08:00:00.000000000 +0800
 @@ -1,28 +0,0 @@
 -.@{steps-prefix-cls}-label-vertical {
@@ -7537,7 +6010,7 @@ diff -ruNa ant-design-master/components/steps/style/label-placement.less ng-zorr
 -}
 diff -ruNa ant-design-master/components/steps/style/patch.less ng-zorro-antd-master/components/steps/style/patch.less
 --- ant-design-master/components/steps/style/patch.less	1970-01-01 08:00:00.000000000 +0800
-+++ ng-zorro-antd-master/components/steps/style/patch.less	2017-12-24 22:37:17.000000000 +0800
++++ ng-zorro-antd-master/components/steps/style/patch.less	2017-12-21 14:44:18.000000000 +0800
 @@ -0,0 +1,29 @@
 +@import "../../style/themes/default";
 +
@@ -7569,7 +6042,7 @@ diff -ruNa ant-design-master/components/steps/style/patch.less ng-zorro-antd-mas
 +  }
 +}
 diff -ruNa ant-design-master/components/steps/style/progress-dot.less ng-zorro-antd-master/components/steps/style/progress-dot.less
---- ant-design-master/components/steps/style/progress-dot.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/steps/style/progress-dot.less	2017-12-28 10:51:12.000000000 +0800
 +++ ng-zorro-antd-master/components/steps/style/progress-dot.less	1970-01-01 08:00:00.000000000 +0800
 @@ -1,75 +0,0 @@
 -.@{steps-prefix-cls}-dot {
@@ -7648,7 +6121,7 @@ diff -ruNa ant-design-master/components/steps/style/progress-dot.less ng-zorro-a
 -  }
 -}
 diff -ruNa ant-design-master/components/steps/style/small.less ng-zorro-antd-master/components/steps/style/small.less
---- ant-design-master/components/steps/style/small.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/steps/style/small.less	2017-12-28 10:51:12.000000000 +0800
 +++ ng-zorro-antd-master/components/steps/style/small.less	1970-01-01 08:00:00.000000000 +0800
 @@ -1,45 +0,0 @@
 -.@{steps-prefix-cls}-small {
@@ -7697,7 +6170,7 @@ diff -ruNa ant-design-master/components/steps/style/small.less ng-zorro-antd-mas
 -  }
 -}
 diff -ruNa ant-design-master/components/steps/style/vertical.less ng-zorro-antd-master/components/steps/style/vertical.less
---- ant-design-master/components/steps/style/vertical.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/steps/style/vertical.less	2017-12-28 10:51:12.000000000 +0800
 +++ ng-zorro-antd-master/components/steps/style/vertical.less	1970-01-01 08:00:00.000000000 +0800
 @@ -1,67 +0,0 @@
 -.steps-vertical() {
@@ -7768,8 +6241,8 @@ diff -ruNa ant-design-master/components/steps/style/vertical.less ng-zorro-antd-
 -  }
 -}
 diff -ruNa ant-design-master/components/style/color/bezierEasing.less ng-zorro-antd-master/components/style/color/bezierEasing.less
---- ant-design-master/components/style/color/bezierEasing.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/style/color/bezierEasing.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/style/color/bezierEasing.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/style/color/bezierEasing.less	2017-12-21 14:44:18.000000000 +0800
 @@ -1,4 +1,4 @@
 -/* stylelint-disable declaration-bang-space-before,no-duplicate-selectors */
 +/* stylelint-disable declaration-bang-space-before */
@@ -7777,8 +6250,8 @@ diff -ruNa ant-design-master/components/style/color/bezierEasing.less ng-zorro-a
  @functions: ~`(function() {
    var NEWTON_ITERATIONS = 4;
 diff -ruNa ant-design-master/components/style/color/colorPalette.less ng-zorro-antd-master/components/style/color/colorPalette.less
---- ant-design-master/components/style/color/colorPalette.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/style/color/colorPalette.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/style/color/colorPalette.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/style/color/colorPalette.less	2017-12-21 14:44:18.000000000 +0800
 @@ -1,4 +1,3 @@
 -/* stylelint-disable no-duplicate-selectors */
  @import "bezierEasing";
@@ -7879,8 +6352,8 @@ diff -ruNa ant-design-master/components/style/color/colorPalette.less ng-zorro-a
  })()`;
  }
 diff -ruNa ant-design-master/components/style/color/colors.less ng-zorro-antd-master/components/style/color/colors.less
---- ant-design-master/components/style/color/colors.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/style/color/colors.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/style/color/colors.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/style/color/colors.less	2017-12-21 14:44:18.000000000 +0800
 @@ -6,7 +6,7 @@
  @blue-3: color(~`colorPalette("@{blue-6}", 3)`);
  @blue-4: color(~`colorPalette("@{blue-6}", 4)`);
@@ -8014,8 +6487,8 @@ diff -ruNa ant-design-master/components/style/color/colors.less ng-zorro-antd-ma
 -@gold-9: color(~`colorPalette("@{gold-6}", 9)`);
 -@gold-10: color(~`colorPalette("@{gold-6}", 10)`);
 diff -ruNa ant-design-master/components/style/color/tinyColor.less ng-zorro-antd-master/components/style/color/tinyColor.less
---- ant-design-master/components/style/color/tinyColor.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/style/color/tinyColor.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/style/color/tinyColor.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/style/color/tinyColor.less	2017-12-21 14:44:18.000000000 +0800
 @@ -1,4 +1,4 @@
 -/* stylelint-disable declaration-bang-space-before,no-duplicate-selectors */
 +/* stylelint-disable declaration-bang-space-before */
@@ -8023,8 +6496,8 @@ diff -ruNa ant-design-master/components/style/color/tinyColor.less ng-zorro-antd
  @functions: ~`(function() {
  // TinyColor v1.4.1
 diff -ruNa ant-design-master/components/style/core/base.less ng-zorro-antd-master/components/style/core/base.less
---- ant-design-master/components/style/core/base.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/style/core/base.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/style/core/base.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/style/core/base.less	2017-12-21 14:44:18.000000000 +0800
 @@ -1,11 +1,4 @@
 -/* stylelint-disable at-rule-no-unknown */
 -
@@ -8542,8 +7015,8 @@ diff -ruNa ant-design-master/components/style/core/base.less ng-zorro-antd-maste
  
  // Utility classes
 diff -ruNa ant-design-master/components/style/core/iconfont.less ng-zorro-antd-master/components/style/core/iconfont.less
---- ant-design-master/components/style/core/iconfont.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/style/core/iconfont.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/style/core/iconfont.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/style/core/iconfont.less	2017-12-21 14:44:18.000000000 +0800
 @@ -6,6 +6,8 @@
    font-family: 'anticon';
    src: url('@{icon-url}.eot'); /* IE9*/
@@ -8620,7 +7093,7 @@ diff -ruNa ant-design-master/components/style/core/iconfont.less ng-zorro-antd-m
 -.@{iconfont-css-prefix}-ant-design:before { content: "\e9b2"; }
 diff -ruNa ant-design-master/components/style/core/normalize.less ng-zorro-antd-master/components/style/core/normalize.less
 --- ant-design-master/components/style/core/normalize.less	1970-01-01 08:00:00.000000000 +0800
-+++ ng-zorro-antd-master/components/style/core/normalize.less	2017-12-24 22:37:17.000000000 +0800
++++ ng-zorro-antd-master/components/style/core/normalize.less	2017-12-21 14:44:18.000000000 +0800
 @@ -0,0 +1,447 @@
 +/*! normalize.css v7.0.0 | MIT License | github.com/necolas/normalize.css */
 +
@@ -9070,8 +7543,8 @@ diff -ruNa ant-design-master/components/style/core/normalize.less ng-zorro-antd-
 +  display: none;
 +}
 diff -ruNa ant-design-master/components/style/mixins/compatibility.less ng-zorro-antd-master/components/style/mixins/compatibility.less
---- ant-design-master/components/style/mixins/compatibility.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/style/mixins/compatibility.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/style/mixins/compatibility.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/style/mixins/compatibility.less	2017-12-21 14:44:18.000000000 +0800
 @@ -1,5 +1,32 @@
  // Compatibility for browsers.
  
@@ -9106,8 +7579,8 @@ diff -ruNa ant-design-master/components/style/mixins/compatibility.less ng-zorro
  .placeholder(@color: @input-placeholder-color) {
    // Firefox
 diff -ruNa ant-design-master/components/style/mixins/iconfont.less ng-zorro-antd-master/components/style/mixins/iconfont.less
---- ant-design-master/components/style/mixins/iconfont.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/style/mixins/iconfont.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/style/mixins/iconfont.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/style/mixins/iconfont.less	2017-12-21 14:44:18.000000000 +0800
 @@ -27,11 +27,12 @@
  .iconfont-size-under-12px(@size, @rotate: 0deg) {
    display: inline-block;
@@ -9125,8 +7598,8 @@ diff -ruNa ant-design-master/components/style/mixins/iconfont.less ng-zorro-antd
    }
  }
 diff -ruNa ant-design-master/components/style/mixins/index.less ng-zorro-antd-master/components/style/mixins/index.less
---- ant-design-master/components/style/mixins/index.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/style/mixins/index.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/style/mixins/index.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/style/mixins/index.less	2017-12-21 14:44:18.000000000 +0800
 @@ -1,8 +1,8 @@
  // Mixins
  // --------------------------------------------------
@@ -9139,7 +7612,7 @@ diff -ruNa ant-design-master/components/style/mixins/index.less ng-zorro-antd-ma
 -@import "reset";
 diff -ruNa ant-design-master/components/style/mixins/opacity.less ng-zorro-antd-master/components/style/mixins/opacity.less
 --- ant-design-master/components/style/mixins/opacity.less	1970-01-01 08:00:00.000000000 +0800
-+++ ng-zorro-antd-master/components/style/mixins/opacity.less	2017-12-24 22:37:17.000000000 +0800
++++ ng-zorro-antd-master/components/style/mixins/opacity.less	2017-12-21 14:44:18.000000000 +0800
 @@ -0,0 +1,8 @@
 +// Opacity
 +
@@ -9150,7 +7623,7 @@ diff -ruNa ant-design-master/components/style/mixins/opacity.less ng-zorro-antd-
 +  filter: ~"alpha(opacity=@{opacity-ie})";
 +}
 diff -ruNa ant-design-master/components/style/mixins/reset.less ng-zorro-antd-master/components/style/mixins/reset.less
---- ant-design-master/components/style/mixins/reset.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/style/mixins/reset.less	2017-12-28 10:51:12.000000000 +0800
 +++ ng-zorro-antd-master/components/style/mixins/reset.less	1970-01-01 08:00:00.000000000 +0800
 @@ -1,12 +0,0 @@
 -@import '../themes/default';
@@ -9166,8 +7639,8 @@ diff -ruNa ant-design-master/components/style/mixins/reset.less ng-zorro-antd-ma
 -  list-style: none;
 -}
 diff -ruNa ant-design-master/components/style/themes/default.less ng-zorro-antd-master/components/style/themes/default.less
---- ant-design-master/components/style/themes/default.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/style/themes/default.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/style/themes/default.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/style/themes/default.less	2017-12-21 14:44:18.000000000 +0800
 @@ -8,10 +8,9 @@
  @primary-color          : @blue-6;
  @info-color             : @blue-6;
@@ -9529,7 +8002,7 @@ diff -ruNa ant-design-master/components/style/themes/default.less ng-zorro-antd-
 -@pagination-item-size: 32px;
 -@pagination-item-size-sm: 24px;
 diff -ruNa ant-design-master/components/style/v2-compatible-reset.less ng-zorro-antd-master/components/style/v2-compatible-reset.less
---- ant-design-master/components/style/v2-compatible-reset.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/style/v2-compatible-reset.less	2017-12-28 10:51:12.000000000 +0800
 +++ ng-zorro-antd-master/components/style/v2-compatible-reset.less	1970-01-01 08:00:00.000000000 +0800
 @@ -1,14 +0,0 @@
 -// For 2.x reset compatibility
@@ -9547,8 +8020,8 @@ diff -ruNa ant-design-master/components/style/v2-compatible-reset.less ng-zorro-
 -  list-style: none;
 -}
 diff -ruNa ant-design-master/components/switch/style/index.less ng-zorro-antd-master/components/switch/style/index.less
---- ant-design-master/components/switch/style/index.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/switch/style/index.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/switch/style/index.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/switch/style/index.less	2017-12-21 14:44:18.000000000 +0800
 @@ -5,15 +5,14 @@
  @switch-duration: .36s;
  
@@ -9726,8 +8199,8 @@ diff -ruNa ant-design-master/components/switch/style/index.less ng-zorro-antd-ma
    }
  }
 diff -ruNa ant-design-master/components/table/style/index.less ng-zorro-antd-master/components/table/style/index.less
---- ant-design-master/components/table/style/index.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/table/style/index.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/table/style/index.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/table/style/index.less	2017-12-21 14:44:18.000000000 +0800
 @@ -2,20 +2,20 @@
  @import "../../style/mixins/index";
  
@@ -10028,7 +8501,7 @@ diff -ruNa ant-design-master/components/table/style/index.less ng-zorro-antd-mas
 -@import './size';
 diff -ruNa ant-design-master/components/table/style/patch.less ng-zorro-antd-master/components/table/style/patch.less
 --- ant-design-master/components/table/style/patch.less	1970-01-01 08:00:00.000000000 +0800
-+++ ng-zorro-antd-master/components/table/style/patch.less	2017-12-24 22:37:17.000000000 +0800
++++ ng-zorro-antd-master/components/table/style/patch.less	2017-12-21 14:44:18.000000000 +0800
 @@ -0,0 +1,19 @@
 +.nz-resize-container {
 +  position: relative;
@@ -10050,9 +8523,9 @@ diff -ruNa ant-design-master/components/table/style/patch.less ng-zorro-antd-mas
 +  }
 +}
 diff -ruNa ant-design-master/components/table/style/size.less ng-zorro-antd-master/components/table/style/size.less
---- ant-design-master/components/table/style/size.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/table/style/size.less	2017-12-28 10:51:12.000000000 +0800
 +++ ng-zorro-antd-master/components/table/style/size.less	1970-01-01 08:00:00.000000000 +0800
-@@ -1,99 +0,0 @@
+@@ -1,100 +0,0 @@
 -.@{table-prefix-cls}-middle {
 -  > .@{table-prefix-cls}-title,
 -  > .@{table-prefix-cls}-footer {
@@ -10110,6 +8583,15 @@ diff -ruNa ant-design-master/components/table/style/size.less ng-zorro-antd-mast
 -      }
 -    }
 -
+-    > .@{table-prefix-cls}-scroll > .@{table-prefix-cls}-header > table,
+-    > .@{table-prefix-cls}-scroll > .@{table-prefix-cls}-body > table,
+-    > .@{table-prefix-cls}-fixed-left > .@{table-prefix-cls}-header > table,
+-    > .@{table-prefix-cls}-fixed-right > .@{table-prefix-cls}-header > table,
+-    > .@{table-prefix-cls}-fixed-left > .@{table-prefix-cls}-body-outer > .@{table-prefix-cls}-body-inner > table,
+-    > .@{table-prefix-cls}-fixed-right > .@{table-prefix-cls}-body-outer > .@{table-prefix-cls}-body-inner > table {
+-      padding: 0;
+-    }
+-
 -    .@{table-prefix-cls}-header {
 -      background: @component-background;
 -    }
@@ -10122,14 +8604,6 @@ diff -ruNa ant-design-master/components/table/style/size.less ng-zorro-antd-mast
 -
 -  &.@{table-prefix-cls}-bordered {
 -    border-right: 0;
--
--    .@{table-prefix-cls}-header > table,
--    .@{table-prefix-cls}-body > table,
--    .@{table-prefix-cls}-fixed-left table,
--    .@{table-prefix-cls}-fixed-right table {
--      border: 0;
--      padding: 0;
--    }
 -
 -    .@{table-prefix-cls}-title {
 -      border: 0;
@@ -10153,8 +8627,8 @@ diff -ruNa ant-design-master/components/table/style/size.less ng-zorro-antd-mast
 -  }
 -}
 diff -ruNa ant-design-master/components/tabs/style/card-style.less ng-zorro-antd-master/components/tabs/style/card-style.less
---- ant-design-master/components/tabs/style/card-style.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/tabs/style/card-style.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/tabs/style/card-style.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/tabs/style/card-style.less	2017-12-21 14:44:18.000000000 +0800
 @@ -1,32 +1,33 @@
  @import "../../style/themes/default";
  @import "../../style/mixins/index";
@@ -10258,8 +8732,8 @@ diff -ruNa ant-design-master/components/tabs/style/card-style.less ng-zorro-antd
        &-active {
          padding-bottom: 4px;
 diff -ruNa ant-design-master/components/tabs/style/index.less ng-zorro-antd-master/components/tabs/style/index.less
---- ant-design-master/components/tabs/style/index.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/tabs/style/index.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/tabs/style/index.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/tabs/style/index.less	2017-12-21 14:44:18.000000000 +0800
 @@ -5,10 +5,11 @@
  @import "./card-style";
  
@@ -10376,7 +8850,7 @@ diff -ruNa ant-design-master/components/tabs/style/index.less ng-zorro-antd-mast
    &-vertical&-left {
 diff -ruNa ant-design-master/components/tabs/style/patch.less ng-zorro-antd-master/components/tabs/style/patch.less
 --- ant-design-master/components/tabs/style/patch.less	1970-01-01 08:00:00.000000000 +0800
-+++ ng-zorro-antd-master/components/tabs/style/patch.less	2017-12-24 22:37:17.000000000 +0800
++++ ng-zorro-antd-master/components/tabs/style/patch.less	2017-12-21 14:44:18.000000000 +0800
 @@ -0,0 +1,20 @@
 +nz-tab {
 +  display: block;
@@ -10399,8 +8873,8 @@ diff -ruNa ant-design-master/components/tabs/style/patch.less ng-zorro-antd-mast
 +  display: block;
 +}
 diff -ruNa ant-design-master/components/tag/style/index.less ng-zorro-antd-master/components/tag/style/index.less
---- ant-design-master/components/tag/style/index.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/tag/style/index.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/tag/style/index.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/tag/style/index.less	2017-12-21 14:44:18.000000000 +0800
 @@ -4,13 +4,12 @@
  @tag-prefix-cls: ~"@{ant-prefix}-tag";
  
@@ -10460,7 +8934,7 @@ diff -ruNa ant-design-master/components/tag/style/index.less ng-zorro-antd-maste
        background: @@darkColor;
 diff -ruNa ant-design-master/components/tag/style/patch.less ng-zorro-antd-master/components/tag/style/patch.less
 --- ant-design-master/components/tag/style/patch.less	1970-01-01 08:00:00.000000000 +0800
-+++ ng-zorro-antd-master/components/tag/style/patch.less	2017-12-24 22:37:17.000000000 +0800
++++ ng-zorro-antd-master/components/tag/style/patch.less	2017-12-21 14:44:18.000000000 +0800
 @@ -0,0 +1,5 @@
 +@import "../../style/themes/default";
 +
@@ -10468,8 +8942,8 @@ diff -ruNa ant-design-master/components/tag/style/patch.less ng-zorro-antd-maste
 +  display: inline-block;
 +}
 diff -ruNa ant-design-master/components/time-picker/style/index.less ng-zorro-antd-master/components/time-picker/style/index.less
---- ant-design-master/components/time-picker/style/index.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/time-picker/style/index.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/time-picker/style/index.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/time-picker/style/index.less	2017-12-21 14:44:18.000000000 +0800
 @@ -3,10 +3,8 @@
  @import "../../input/style/mixin";
  
@@ -10632,7 +9106,7 @@ diff -ruNa ant-design-master/components/time-picker/style/index.less ng-zorro-an
  }
 diff -ruNa ant-design-master/components/time-picker/style/patch.less ng-zorro-antd-master/components/time-picker/style/patch.less
 --- ant-design-master/components/time-picker/style/patch.less	1970-01-01 08:00:00.000000000 +0800
-+++ ng-zorro-antd-master/components/time-picker/style/patch.less	2017-12-24 22:37:17.000000000 +0800
++++ ng-zorro-antd-master/components/time-picker/style/patch.less	2017-12-21 14:44:18.000000000 +0800
 @@ -0,0 +1,12 @@
 +@import './index.less';
 +
@@ -10647,8 +9121,8 @@ diff -ruNa ant-design-master/components/time-picker/style/patch.less ng-zorro-an
 +  }
 +}
 diff -ruNa ant-design-master/components/timeline/style/index.less ng-zorro-antd-master/components/timeline/style/index.less
---- ant-design-master/components/timeline/style/index.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/timeline/style/index.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/timeline/style/index.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/timeline/style/index.less	2017-12-21 14:44:18.000000000 +0800
 @@ -5,22 +5,20 @@
  @timeline-color: @border-color-split;
  
@@ -10722,8 +9196,8 @@ diff -ruNa ant-design-master/components/timeline/style/index.less ng-zorro-antd-
  
      &-last {
 diff -ruNa ant-design-master/components/tooltip/style/index.less ng-zorro-antd-master/components/tooltip/style/index.less
---- ant-design-master/components/tooltip/style/index.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/tooltip/style/index.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/tooltip/style/index.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/tooltip/style/index.less	2017-12-21 14:44:18.000000000 +0800
 @@ -5,11 +5,12 @@
  
  // Base class
@@ -10793,15 +9267,15 @@ diff -ruNa ant-design-master/components/tooltip/style/index.less ng-zorro-antd-m
    &-placement-topRight &-arrow {
 diff -ruNa ant-design-master/components/tooltip/style/patch.less ng-zorro-antd-master/components/tooltip/style/patch.less
 --- ant-design-master/components/tooltip/style/patch.less	1970-01-01 08:00:00.000000000 +0800
-+++ ng-zorro-antd-master/components/tooltip/style/patch.less	2017-12-24 22:37:17.000000000 +0800
++++ ng-zorro-antd-master/components/tooltip/style/patch.less	2017-12-21 14:44:18.000000000 +0800
 @@ -0,0 +1,4 @@
 +@import "./index.less";
 +.@{tooltip-prefix-cls} {
 +  position: relative;
 +}
 diff -ruNa ant-design-master/components/transfer/style/index.less ng-zorro-antd-master/components/transfer/style/index.less
---- ant-design-master/components/transfer/style/index.less	2017-12-24 22:37:17.000000000 +0800
-+++ ng-zorro-antd-master/components/transfer/style/index.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/transfer/style/index.less	2017-12-28 10:51:12.000000000 +0800
++++ ng-zorro-antd-master/components/transfer/style/index.less	2017-12-21 14:44:18.000000000 +0800
 @@ -5,10 +5,11 @@
  @transfer-prefix-cls: ~"@{ant-prefix}-transfer";
  
@@ -10906,7 +9380,7 @@ diff -ruNa ant-design-master/components/transfer/style/index.less ng-zorro-antd-
    }
 diff -ruNa ant-design-master/components/transfer/style/patch.less ng-zorro-antd-master/components/transfer/style/patch.less
 --- ant-design-master/components/transfer/style/patch.less	1970-01-01 08:00:00.000000000 +0800
-+++ ng-zorro-antd-master/components/transfer/style/patch.less	2017-12-24 22:37:17.000000000 +0800
++++ ng-zorro-antd-master/components/transfer/style/patch.less	2017-12-21 14:44:18.000000000 +0800
 @@ -0,0 +1,18 @@
 +nz-transfer {
 +	display: block;
@@ -10927,7 +9401,7 @@ diff -ruNa ant-design-master/components/transfer/style/patch.less ng-zorro-antd-
 +	}
 +}
 diff -ruNa ant-design-master/components/tree/style/index.less ng-zorro-antd-master/components/tree/style/index.less
---- ant-design-master/components/tree/style/index.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/tree/style/index.less	2017-12-28 10:51:12.000000000 +0800
 +++ ng-zorro-antd-master/components/tree/style/index.less	1970-01-01 08:00:00.000000000 +0800
 @@ -1,204 +0,0 @@
 -@import "../../style/themes/default";
@@ -11135,7 +9609,7 @@ diff -ruNa ant-design-master/components/tree/style/index.less ng-zorro-antd-mast
 -  }
 -}
 diff -ruNa ant-design-master/components/tree/style/mixin.less ng-zorro-antd-master/components/tree/style/mixin.less
---- ant-design-master/components/tree/style/mixin.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/tree/style/mixin.less	2017-12-28 10:51:12.000000000 +0800
 +++ ng-zorro-antd-master/components/tree/style/mixin.less	1970-01-01 08:00:00.000000000 +0800
 @@ -1,27 +0,0 @@
 -@import "../../style/mixins/index";
@@ -11166,7 +9640,7 @@ diff -ruNa ant-design-master/components/tree/style/mixin.less ng-zorro-antd-mast
 -  }
 -}
 diff -ruNa ant-design-master/components/tree-select/style/index.less ng-zorro-antd-master/components/tree-select/style/index.less
---- ant-design-master/components/tree-select/style/index.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/tree-select/style/index.less	2017-12-28 10:51:12.000000000 +0800
 +++ ng-zorro-antd-master/components/tree-select/style/index.less	1970-01-01 08:00:00.000000000 +0800
 @@ -1,146 +0,0 @@
 -@import "../../style/themes/default";
@@ -11316,7 +9790,7 @@ diff -ruNa ant-design-master/components/tree-select/style/index.less ng-zorro-an
 -  }
 -}
 diff -ruNa ant-design-master/components/upload/style/index.less ng-zorro-antd-master/components/upload/style/index.less
---- ant-design-master/components/upload/style/index.less	2017-12-24 22:37:17.000000000 +0800
+--- ant-design-master/components/upload/style/index.less	2017-12-28 10:51:12.000000000 +0800
 +++ ng-zorro-antd-master/components/upload/style/index.less	1970-01-01 08:00:00.000000000 +0800
 @@ -1,451 +0,0 @@
 -@import "../../style/themes/default";

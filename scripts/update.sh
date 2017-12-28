@@ -16,4 +16,6 @@ mkdir ${ng}
 mkdir ${react}
 mv ${ng}_cmp/${ng}/src/components ./${ng}
 mv ${react}_cmp/${react}/components ./${react}
+# 将文件名重命名至一致
+mv ./${ng}/components/datepicker ./${ng}/components/date-picker
 rm -rf ${ng}_cmp ${react}_cmp
